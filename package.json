@@ -5,9 +5,11 @@
 	"author": "9956 <zhz995617@gmail.com>",
 	"scripts": {
 		"prepare": "husky install",
-		"build": "node scripts/build.js"
+		"build": "node scripts/build.js",
+		"dev": "rm -rf ./dist && node scripts/dev.js"
 	},
 	"dependencies": {
+		"chalk": "^4.1.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},

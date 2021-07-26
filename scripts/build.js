@@ -1,9 +1,10 @@
 const webpack = require('webpack');
+const chalk = require('chalk');
 
 const configFactory = require('../config/webpack.config');
 const config = configFactory('production');
 
-console.log('Creating an optimized production build...');
+console.log(chalk.blue('Creating an optimized production build...'));
 
 webpack(config).run((err, status) => {
 	let messages;
@@ -13,5 +14,5 @@ webpack(config).run((err, status) => {
 	} else {
 		messages = status.toJson({ all: false, warnings: true, errors: true });
 	}
-	console.log(messages);
+	console.log(chalk.red(messages));
 });
