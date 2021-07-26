@@ -5,7 +5,8 @@
 	"author": "9956 <zhz995617@gmail.com>",
 	"scripts": {
 		"prepare": "husky install",
-		"build": "node scripts/build.js"
+		"build": "node scripts/build.js",
+		"dev": "rm -rf ./dist && node scripts/dev.js"
 	},
 	"dependencies": {
 		"babel-loader": "^8.2.2",
