@@ -57,8 +57,9 @@ module.exports = function (webpackEnv) {
 		output: {
 			path: isEnvProduction ? paths.appBuild : undefined,
 			filename: isEnvProduction
-				? '[name].[contenthash:8].js'
-				: isEnvDevelopment && 'bundle.js',
+				? 'simple.min.js'
+				: isEnvDevelopment && 'simple.js',
+			library: 'simple',
 		},
 	};
 };
