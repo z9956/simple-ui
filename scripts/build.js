@@ -10,9 +10,28 @@ webpack(config).run((err, status) => {
 	let messages;
 
 	if (err) {
-		messages = err.message;
+		if (err.message) {
+			messages = {
+				errors: [err.message],
+				warnings: [],
+			};
+		}
 	} else {
 		messages = status.toJson({ all: false, warnings: true, errors: true });
 	}
-	console.log(chalk.red(messages));
+
+	const errors = messages.errors;
+	const warnings = messages.warnings;
+
+	if (warnings) {
+		warnings.forEach((message) => {
+			console.log(chalk.yellow(message.message));
+		});
+	}
+
+	if (errors) {
+		errors.forEach((message) => {
+			console.log(chalk.red(message.message));
+		});
+	}
 });
