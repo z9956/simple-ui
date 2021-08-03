@@ -1,6 +1,6 @@
 const paths = require('./paths');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function (webpackEnv) {
 	const isEnvDevelopment = webpackEnv === 'development';
@@ -20,17 +20,17 @@ module.exports = function (webpackEnv) {
 					loader: require.resolve('babel-loader'),
 					exclude: /node_modules/,
 				},
-				{
-					test: /\.css$/i,
-					use: [
-						{ loader: MiniCssExtractPlugin.loader },
-						{ loader: 'css-loader' },
-					],
-				},
-				{
-					test: /\.s[ac]ss$/i,
-					use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-				},
+				// {
+				// 	test: /\.css$/i,
+				// 	use: [
+				// 		{ loader: MiniCssExtractPlugin.loader },
+				// 		{ loader: 'css-loader' },
+				// 	],
+				// },
+				// {
+				// 	test: /\.s[ac]ss$/i,
+				// 	use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				// },
 				{
 					test: /\.(png|jpe?g|gif|webp)$/i,
 					use: [
@@ -48,11 +48,11 @@ module.exports = function (webpackEnv) {
 		},
 		plugins: [
 			new webpack.optimize.ModuleConcatenationPlugin(),
-			new MiniCssExtractPlugin({
-				filename: 'styles/simple.css',
-				chunkFilename: '[id].css',
-				ignoreOrder: false,
-			}),
+			// new MiniCssExtractPlugin({
+			// 	filename: 'styles/simple.css',
+			// 	chunkFilename: '[id].css',
+			// 	ignoreOrder: false,
+			// }),
 		],
 		output: {
 			path: isEnvProduction ? paths.appBuild : undefined,
