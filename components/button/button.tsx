@@ -1,10 +1,13 @@
 import React, {
 	ForwardRefRenderFunction,
-	MouseEvent,
+	ButtonHTMLAttributes,
 	ReactNode,
 	forwardRef,
 } from 'react';
+import { cx } from '@emotion/css';
+
 import { SizeType } from '../config/size';
+import { getButtonStyles } from './style';
 
 const ButtonTypes: string[] = [
 	'default',
@@ -35,16 +38,25 @@ export interface BaseButtonProps {
 	children?: ReactNode;
 }
 
-export type NativeButtonProps = {
-	htmlType?: ButtonHTMLType;
-};
+export type ButtonProps = BaseButtonProps &
+	ButtonHTMLAttributes<HTMLButtonElement> & {};
 
-export type ButtonProps = BaseButtonProps & NativeButtonProps & {};
+const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
+	props,
+	ref,
+) => {
+	const { type = 'primary', className, size, children, ...otherProps } = props;
 
-const Button: ForwardRefRenderFunction<unknown, ButtonProps> = (props, ref) => {
-	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {};
+	//TODO
+	// const theme = getTheme();
 
-	return <button onClick={handleClick} />;
+	const styles = getButtonStyles();
+
+	return (
+		<button className={cx(styles, className)} ref={ref} {...otherProps}>
+			{children && <span>{children}</span>}
+		</button>
+	);
 };
 
 Button.displayName = 'Button';
