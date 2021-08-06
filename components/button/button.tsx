@@ -50,10 +50,10 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
 	//TODO
 	// const theme = getTheme();
 
-	const styles = getButtonStyles();
+	const styles = getButtonStyles({ type, size });
 
 	return (
-		<button className={cx(styles, className)} ref={ref} {...otherProps}>
+		<button className={cx(styles.button, className)} ref={ref} {...otherProps}>
 			{children && <span>{children}</span>}
 		</button>
 	);
