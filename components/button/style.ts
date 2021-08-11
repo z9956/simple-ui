@@ -7,7 +7,13 @@ export type StyleProps = {
 };
 
 export const getButtonStyles = (props: StyleProps) => {
+	const {} = getButtonSize();
+
 	return {
-		button: {},
+		button: {
+			cursor: 'pointer',
+		},
 	};
 };
+
+const getButtonSize = () => {};
