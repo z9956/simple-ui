@@ -6,8 +6,21 @@ export type StyleProps = {
 	type?: ButtonType;
 };
 
+const getDisabledStyles = () => {};
+
+const getVariantStyles = (size: SizeType) => {
+	switch (size) {
+		case 'sm':
+			return {
+				padding: '2rem',
+				fontSize: '2rem',
+			};
+	}
+};
+
 export const getButtonStyles = (props: StyleProps) => {
-	const {} = getButtonSize();
+	const { size } = props;
+	const {} = getButtonSize(size);
 
 	return {
 		button: {
