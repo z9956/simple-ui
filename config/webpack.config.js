@@ -9,7 +9,7 @@ module.exports = function (webpackEnv) {
 	return {
 		entry: paths.appIndex,
 		resolve: {
-			exportsFields: paths.moduleFileExtensions.map((ext) => `.${ext}`),
+			extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`),
 		},
 		externals: [/^react\/.+$/, /^react-dom\/.+$/],
 		module: {
