@@ -41,23 +41,31 @@ export interface BaseButtonProps {
 export type ButtonProps = BaseButtonProps &
 	ButtonHTMLAttributes<HTMLButtonElement> & {};
 
-const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
-	props,
-	ref,
-) => {
-	const { type = 'primary', className, size, children, ...otherProps } = props;
+export const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> =
+	(props, ref) => {
+		const {
+			type = 'primary',
+			className,
+			size,
+			children,
+			...otherProps
+		} = props;
 
-	//TODO
-	// const theme = getTheme();
+		//TODO
+		// const theme = getTheme();
 
-	const styles = getButtonStyles({ type, size });
+		const styles = getButtonStyles({ type, size });
 
-	return (
-		<button className={cx(styles.button, className)} ref={ref} {...otherProps}>
-			{children && <span>{children}</span>}
-		</button>
-	);
-};
+		return (
+			<button
+				className={cx(styles.button, className)}
+				ref={ref}
+				{...otherProps}
+			>
+				{children && <span>{children}</span>}
+			</button>
+		);
+	};
 
 Button.displayName = 'Button';
 
