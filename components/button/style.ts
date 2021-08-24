@@ -4,6 +4,7 @@ import { SizeType } from '../config/size';
 import { ButtonTypes } from './button';
 import { defaultStyles } from '../styles/default';
 
+
 export type StyleProps = {
 	size: SizeType;
 	variant?: ButtonTypes;
@@ -14,17 +15,17 @@ export type StyleProps = {
 const getButtonColors = (variant: ButtonTypes) => {
 	const colors = {
 		secondary: {
-			border: defaultStyles.border,
+			borderColor: defaultStyles.border,
 			color: defaultStyles.secondary,
 			background: defaultStyles.background,
 		},
 		primary: {
-			border: defaultStyles.primary,
+			borderColor: defaultStyles.primary,
 			color: '#fff',
 			background: defaultStyles.primary,
 		},
 		error: {
-			border: defaultStyles.error,
+			borderColor: defaultStyles.error,
 			color: '#fff',
 			background: defaultStyles.error,
 		},
@@ -35,10 +36,10 @@ const getButtonColors = (variant: ButtonTypes) => {
 
 export const getButtonStyles = (props: StyleProps) => {
 	const { size, variant } = props;
-	const { width, height, padding, fontSize } = getButtonSize(size);
+	const sizeStyles = getButtonSize(size);
 	const variantStyles = getButtonColors(variant);
 	const disabledStyles = {
-		border: defaultStyles.disabled,
+		borderColor: defaultStyles.disabled,
 		color: '#ccc',
 		background: defaultStyles.disabledBorder,
 	};
@@ -46,10 +47,9 @@ export const getButtonStyles = (props: StyleProps) => {
 	return {
 		button: css({
 			cursor: 'pointer',
-			width,
-			height,
-			padding,
-			fontSize,
+			textAlign: `center`,
+			border: `1px solid transparent`,
+			...sizeStyles,
 			...variantStyles,
 			':disabled': disabledStyles,
 			'&[disabled]': disabledStyles,
@@ -68,10 +68,12 @@ const getButtonSize = (size: SizeType) => {
 	switch (size) {
 		case 'sm':
 			return {
-				width: 'initial',
-				height: '2rem',
-				padding: '1.875rem',
-				fontSize: '1rem',
+				width: '60px',
+				height: '24px',
+				padding: '0 7px',
+				fontSize: '14px',
+				borderRadius:'2px',
+				lineHeight: '1.5'
 			};
 		case 'md':
 			return defaultSize;
