@@ -1,27 +1,27 @@
 import { css } from '@emotion/css';
 
 import { SizeType } from '../config/size';
-import { ButtonType } from './button';
+import { ButtonTypes } from './button';
 import { defaultStyles } from '../styles/default';
 
 export type StyleProps = {
 	size: SizeType;
-	type?: ButtonType;
+	variant?: ButtonTypes;
 };
 
 // const getDisabledStyles = () => {};
 //
-const getButtonColors = (type: ButtonType) => {
+const getButtonColors = (variant: ButtonTypes) => {
 	const colors = {
-		default: {
+		secondary: {
 			border: defaultStyles.border,
-			color: defaultStyles.defaultColor,
+			color: defaultStyles.secondary,
 			background: defaultStyles.background,
 		},
-		success: {
-			border: defaultStyles.success,
+		primary: {
+			border: defaultStyles.primary,
 			color: '#fff',
-			background: defaultStyles.success,
+			background: defaultStyles.primary,
 		},
 		error: {
 			border: defaultStyles.error,
@@ -30,13 +30,13 @@ const getButtonColors = (type: ButtonType) => {
 		},
 	};
 
-	return colors[type];
+	return colors[variant];
 };
 
 export const getButtonStyles = (props: StyleProps) => {
-	const { size, type } = props;
+	const { size, variant } = props;
 	const { width, height, padding, fontSize } = getButtonSize(size);
-	const variantStyles = getButtonColors(type);
+	const variantStyles = getButtonColors(variant);
 	const disabledStyles = {
 		border: defaultStyles.disabled,
 		color: '#ccc',

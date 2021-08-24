@@ -8,32 +8,21 @@ import { cx } from '@emotion/css';
 
 import { SizeType } from '../config/size';
 import { getButtonStyles } from './style';
+import { tuple } from '../type/type';
 
-const ButtonTypes: string[] = [
-	'default',
-	'primary',
-	'ghost',
-	'dashed',
-	'link',
-	'text',
-];
-const ButtonShapes: string[] = ['circle', 'round'];
-const ButtonHTMLTypes: string[] = ['submit', 'button', 'reset'];
+export const buttonTypes = tuple('secondary', 'primary', 'link');
+// export const buttonShapes: tuple('circle', 'round');
 
-export type ButtonType = typeof ButtonTypes[number];
-export type ButtonShape = typeof ButtonShapes[number];
-export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+export type ButtonTypes = typeof buttonTypes[number];
+// export type ButtonShapes = typeof buttonShapes[number];
 
 export interface BaseButtonProps {
-	type?: ButtonType;
+	variant?: ButtonTypes;
 	icon?: ReactNode;
-	shape?: ButtonShape;
 	size?: SizeType;
 	loading?: boolean | { delay?: number };
 	prefixCls?: string;
 	className?: string;
-	ghost?: boolean;
-	danger?: boolean;
 	block?: boolean;
 	children?: ReactNode;
 }
@@ -44,7 +33,7 @@ export type ButtonProps = BaseButtonProps &
 export const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> =
 	(props, ref) => {
 		const {
-			type = 'primary',
+			variant = 'primary',
 			className,
 			size,
 			children,
@@ -54,7 +43,7 @@ export const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> =
 		//TODO
 		// const theme = getTheme();
 
-		const styles = getButtonStyles({ type, size });
+		const styles = getButtonStyles({ variant, size });
 
 		return (
 			<button
