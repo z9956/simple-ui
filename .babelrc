@@ -1,15 +1,16 @@
 {
 	"presets": [
-		"@babel/preset-flow",
 		"@babel/env",
 		[
 			"@babel/preset-react",
 			{
-				"runtime": "automatic"
+				"runtime": "automatic",
+				"importSource": "@emotion/react"
 			}
 		]
 	],
 	"plugins": [
+		"@emotion/babel-plugin",
 		"@babel/plugin-proposal-optional-chaining",
 		"@babel/plugin-proposal-nullish-coalescing-operator"
 	]
