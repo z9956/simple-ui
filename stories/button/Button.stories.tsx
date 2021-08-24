@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import Button, { ButtonProps } from '../../components/button';
 import { ButtonTypes } from '../../components/button/button';
 import { SizeType } from '../../components/config/size';
+import styles from './style';
 
 export default {
 	title: 'Example/Button',
@@ -21,16 +22,20 @@ export const Basic: Story<ButtonProps> = () => {
 		<div>
 			<div>
 				{buttonTypes.map((type) => {
-					return sizes.map((size) => {
-						const text = `${type} ${size}`;
-						return (
-							<Fragment key={text}>
-								<Button variant={type} size={size}>
-									{text}
-								</Button>
-							</Fragment>
-						);
-					});
+					return <div className={styles.group}>
+						{
+							sizes.map((size) => {
+								const text = `${type} ${size}`;
+								return (
+									<Fragment key={text}>
+										<Button className={styles.button} variant={type} size={size}>
+											{text}
+										</Button>
+									</Fragment>
+								);
+							})
+						}
+					</div>
 				})}
 			</div>
 		</div>
