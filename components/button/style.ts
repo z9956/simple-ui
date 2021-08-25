@@ -16,7 +16,7 @@ const getButtonColors = (variant: ButtonTypes) => {
 	const colors = {
 		secondary: {
 			borderColor: defaultStyles.border,
-			color: defaultStyles.secondary,
+			color: defaultStyles.defaultColor,
 			background: defaultStyles.background,
 		},
 		primary: {
@@ -47,8 +47,9 @@ export const getButtonStyles = (props: StyleProps) => {
 	return {
 		button: css({
 			cursor: 'pointer',
-			textAlign: `center`,
-			border: `1px solid transparent`,
+			textAlign: 'center',
+			border: '1px solid transparent',
+			borderRadius: '2px',
 			...sizeStyles,
 			...variantStyles,
 			':disabled': disabledStyles,
@@ -59,30 +60,29 @@ export const getButtonStyles = (props: StyleProps) => {
 
 const getButtonSize = (size: SizeType) => {
 	const defaultSize = {
-		width: 'initial',
-		height: '2.75rem',
-		padding: '1.875rem',
-		fontSize: '1rem',
+		height: '32px',
+		padding: '4px 15px',
+		fontSize: '14px',
+		lineHeight: '1.5715'
 	};
 
 	switch (size) {
 		case 'sm':
 			return {
-				width: '60px',
 				height: '24px',
 				padding: '0 7px',
 				fontSize: '14px',
 				borderRadius:'2px',
-				lineHeight: '1.5'
+				lineHeight: '1.5715'
 			};
 		case 'md':
 			return defaultSize;
 		case 'lg':
 			return {
-				width: 'initial',
-				height: '2.75rem',
-				padding: '1.875rem',
-				fontSize: '1rem',
+				height: '40px',
+				padding: '6px 15px',
+				fontSize: '14px',
+				lineHeight: '1.5715'
 			};
 		default:
 			return defaultSize;
