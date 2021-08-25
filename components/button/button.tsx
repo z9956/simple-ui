@@ -10,7 +10,7 @@ import { SizeType } from '../config/size';
 import { getButtonStyles } from './style';
 import { tuple } from '../type/type';
 
-export const buttonTypes = tuple('secondary', 'primary', 'link');
+export const buttonTypes = tuple('secondary', 'primary',  'error');
 // export const buttonShapes: tuple('circle', 'round');
 
 export type ButtonTypes = typeof buttonTypes[number];
