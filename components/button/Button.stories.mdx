@@ -1,0 +1,29 @@
+import { Meta, Story, Props, Preview } from '@storybook/addon-docs/blocks';
+import Button from './button';
+
+<Meta title='MDX/Button' component={ Button } parameters={{ previewTabs: { canvas: { hidden: true } } }}/>
+
+<br />
+
+# Button
+<br />
+
+
+## secondary
+<Preview>
+	<Story name='secondary'>
+		<Button variant='secondary' size='sm'>sm</Button>
+	</Story>
+	<Story name='secondary'>
+		<Button variant='secondary' size='md'>md</Button>
+	</Story>
+	<Story name='secondary'>
+		<Button variant='secondary' size='lg'>secondary lg</Button>
+	</Story>
+
+</Preview>
+
+## 属性详情
+
+<Props of={ Button } />
+
