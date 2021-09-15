@@ -6,9 +6,6 @@ module.exports = {
 		'../components/**/*.stories.@(js|jsx|ts|tsx|mdx)',
 	],
 	addons: [
-		'@storybook/addon-links',
-		'@storybook/addon-essentials',
-		'@storybook/addon-knobs/register',
 		{
 			name: '@storybook/addon-docs', // new addon for docs
 			options: {
@@ -18,6 +15,9 @@ module.exports = {
 				transcludeMarkdown: true,
 			},
 		},
+		'@storybook/addon-links',
+		'@storybook/addon-essentials',
+		'@storybook/addon-knobs/register',
 	],
 	webpackFinal: async (config) => {
 		config.module.rules.push({
