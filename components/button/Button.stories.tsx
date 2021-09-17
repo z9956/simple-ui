@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import { Meta, Story } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
 
 import Button, { ButtonProps } from '../button';
-import { ButtonTypes } from '../button/button';
+import { ButtonTypes } from 'components/button/Button';
 import { SizeType } from '../config/size';
 
 const styles = {
@@ -18,12 +19,12 @@ const styles = {
 export default {
 	title: 'Example/Button',
 	component: Button,
-	argTypes: {
-		variant: {
-			Description: '',
-			Default: '',
-		},
-	},
+	// argTypes: {
+	// 	variant: {
+	// 		Description: '',
+	// 		Default: '',
+	// 	},
+	// },
 } as Meta;
 
 export const Basic: Story<ButtonProps> = () => {
@@ -53,6 +54,11 @@ export const Basic: Story<ButtonProps> = () => {
 						</div>
 					);
 				})}
+				<div className={styles.group}>
+					<Button variant="primary" onClick={action('button action click')}>
+						click
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

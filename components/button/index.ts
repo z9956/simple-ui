@@ -1,5 +1,5 @@
-import Button from './button';
+import Button from 'components/button/Button';
 
-export { ButtonProps,ButtonTypes } from './button';
+export { ButtonProps, ButtonTypes } from 'components/button/Button';
 
 export default Button;

@@ -10,7 +10,7 @@ import { SizeType } from '../config/size';
 import { getButtonStyles } from './style';
 import { tuple } from '../type/type';
 
-export const buttonTypes = tuple('secondary', 'primary',  'error');
+export const buttonTypes = tuple('secondary', 'primary', 'error');
 // export const buttonShapes: tuple('circle', 'round');
 
 export type ButtonTypes = typeof buttonTypes[number];
@@ -52,6 +52,7 @@ export const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> =
 				{...otherProps}
 			>
 				{children && <span>{children}</span>}
+				<input type="" />
 			</button>
 		);
 	};

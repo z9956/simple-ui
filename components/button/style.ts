@@ -1,9 +1,8 @@
 import { css } from '@emotion/css';
 
 import { SizeType } from '../config/size';
-import { ButtonTypes } from './button';
+import { ButtonTypes } from 'components/button/Button';
 import { defaultStyles } from '../styles/default';
-
 
 export type StyleProps = {
 	size: SizeType;
@@ -49,7 +48,7 @@ export const getButtonStyles = (props: StyleProps) => {
 			cursor: 'pointer',
 			textAlign: 'center',
 			border: '1px solid transparent',
-			borderRadius: '2px',
+			borderRadius: '5px',
 			...sizeStyles,
 			...variantStyles,
 			':disabled': disabledStyles,
@@ -63,7 +62,7 @@ const getButtonSize = (size: SizeType) => {
 		height: '32px',
 		padding: '4px 15px',
 		fontSize: '14px',
-		lineHeight: '1.5715'
+		lineHeight: '1.5715',
 	};
 
 	switch (size) {
@@ -72,8 +71,8 @@ const getButtonSize = (size: SizeType) => {
 				height: '24px',
 				padding: '0 7px',
 				fontSize: '14px',
-				borderRadius:'2px',
-				lineHeight: '1.5715'
+				borderRadius: '2px',
+				lineHeight: '1.5715',
 			};
 		case 'md':
 			return defaultSize;
@@ -82,7 +81,7 @@ const getButtonSize = (size: SizeType) => {
 				height: '40px',
 				padding: '6px 15px',
 				fontSize: '14px',
-				lineHeight: '1.5715'
+				lineHeight: '1.5715',
 			};
 		default:
 			return defaultSize;
