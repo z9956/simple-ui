@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 
 import { SizeType } from '../config/size';
-import { ButtonTypes } from 'components/button/Button';
+import { ButtonTypes } from './Button';
 import { defaultStyles } from '../styles/default';
 
 export type StyleProps = {

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
 
 import Button, { ButtonProps } from '../button';
-import { ButtonTypes } from 'components/button/Button';
+import { ButtonTypes } from './Button';
 import { SizeType } from '../config/size';
 
 const styles = {
