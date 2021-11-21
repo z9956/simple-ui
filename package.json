@@ -36,6 +36,7 @@
 		"@storybook/addon-knobs": "^6.3.1",
 		"@storybook/addon-links": "^6.3.12",
 		"@storybook/addon-storysource": "^6.3.12",
+		"@storybook/addons": "^6.3.12",
 		"@storybook/builder-webpack5": "^6.3.12",
 		"@storybook/manager-webpack5": "^6.3.12",
 		"@storybook/react": "^6.3.12",
@@ -48,9 +49,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-react": "^7.27.0",
 		"eslint-plugin-react-hooks": "^4.3.0",
-		"file-loader": "^6.2.0",
 		"husky": "^7.0.4",
-		"null-loader": "^4.0.1",
 		"prettier": "^2.4.1",
 		"pretty-quick": "^3.1.2"
 	}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const parameters = {
 	// automatically create action args for all props that start with "on"
 	actions: { argTypesRegex: '^on.*' },

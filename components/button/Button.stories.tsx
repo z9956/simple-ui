@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
@@ -19,12 +19,6 @@ const styles = {
 export default {
 	title: 'Example/Button',
 	component: Button,
-	// argTypes: {
-	// 	variant: {
-	// 		Description: '',
-	// 		Default: '',
-	// 	},
-	// },
 } as Meta;
 
 export const Basic: Story<ButtonProps> = () => {
@@ -36,7 +30,7 @@ export const Basic: Story<ButtonProps> = () => {
 			<div>
 				{buttonTypes.map((type) => {
 					return (
-						<div className={styles.group}>
+						<div className={styles.group} key={type}>
 							{sizes.map((size) => {
 								const text = `${type} ${size}`;
 								return (

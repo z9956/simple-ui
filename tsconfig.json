@@ -3,7 +3,7 @@
 		"allowSyntheticDefaultImports": true,
 		"removeComments": true,
 		"lib": ["es6", "dom"],
-		"jsx": "react",
+		"jsx": "react-jsx",
 		"module": "ES6",
 		"moduleResolution": "node",
 		"declaration": true,

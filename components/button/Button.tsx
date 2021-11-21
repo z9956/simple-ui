@@ -1,4 +1,4 @@
-import React, {
+import {
 	ForwardRefRenderFunction,
 	ButtonHTMLAttributes,
 	ReactNode,
@@ -52,7 +52,6 @@ export const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> =
 				{...otherProps}
 			>
 				{children && <span>{children}</span>}
-				<input type="" />
 			</button>
 		);
 	};
