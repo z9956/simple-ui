@@ -9,8 +9,6 @@ export type StyleProps = {
 	variant?: ButtonTypes;
 };
 
-// const getDisabledStyles = () => {};
-//
 const getButtonColors = (variant: ButtonTypes) => {
 	const colors = {
 		secondary: {

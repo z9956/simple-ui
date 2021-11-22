@@ -49,6 +49,11 @@ export const Basic: Story<ButtonProps> = () => {
 					);
 				})}
 				<div className={styles.group}>
+					<Button variant="primary" disabled>
+						disabled
+					</Button>
+				</div>
+				<div className={styles.group}>
 					<Button variant="primary" onClick={action('button action click')}>
 						click
 					</Button>
