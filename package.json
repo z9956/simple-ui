@@ -11,6 +11,11 @@
 		"prepare": "husky install",
 		"storybook": "start-storybook -p 6006"
 	},
+	"browserslist": [
+		"> 0.5%",
+		"last 2 versions",
+		"not dead"
+	],
 	"dependencies": {
 		"@emotion/babel-plugin": "^11.3.0",
 		"@emotion/css": "^11.5.0",
