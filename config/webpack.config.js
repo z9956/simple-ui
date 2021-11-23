@@ -7,6 +7,7 @@ module.exports = function (webpackEnv) {
 	const isEnvProduction = webpackEnv === 'production';
 
 	return {
+		mode: webpackEnv,
 		entry: paths.appIndex,
 		resolve: {
 			extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`),
@@ -15,22 +16,28 @@ module.exports = function (webpackEnv) {
 		module: {
 			rules: [
 				{
-					test: /\.(js|mjs|jsx|ts|tsx)$/,
-					include: paths.appComponents,
-					loader: require.resolve('babel-loader'),
-					exclude: /node_modules/,
+					test: /\.tsx?$/,
+					exclude: /(node_modules)/,
+					loader: 'swc-loader',
+					options: {
+						jsc: {
+							parser: {
+								syntax: 'typescript',
+								tsx: true,
+								dynamicImport: true,
+							},
+							transform: {
+								react: {
+									runtime: 'automatic',
+									refresh: isEnvDevelopment,
+									importSource: '@emotion/react',
+								},
+							},
+							target: 'es2019',
+							loose: true,
+						},
+					},
 				},
-				// {
-				// 	test: /\.css$/i,
-				// 	use: [
-				// 		{ loader: MiniCssExtractPlugin.loader },
-				// 		{ loader: 'css-loader' },
-				// 	],
-				// },
-				// {
-				// 	test: /\.s[ac]ss$/i,
-				// 	use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-				// },
 				{
 					test: /\.(png|jpe?g|gif|webp)$/i,
 					use: [
