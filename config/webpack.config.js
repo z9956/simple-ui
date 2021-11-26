@@ -1,14 +1,18 @@
 const paths = require('./paths');
 const webpack = require('webpack');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function (webpackEnv) {
 	const isEnvDevelopment = webpackEnv === 'development';
-	const isEnvProduction = webpackEnv === 'production';
+	// const isEnvProduction = webpackEnv === 'production';
 
 	return {
+		// target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
 		mode: webpackEnv,
 		entry: paths.appIndex,
+		devServer: {
+			static: paths.appBuild,
+		},
+
 		resolve: {
 			extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`),
 		},
@@ -55,17 +59,15 @@ module.exports = function (webpackEnv) {
 		},
 		plugins: [
 			new webpack.optimize.ModuleConcatenationPlugin(),
-			// new MiniCssExtractPlugin({
-			// 	filename: 'styles/simple.css',
-			// 	chunkFilename: '[id].css',
-			// 	ignoreOrder: false,
-			// }),
+			new webpack.HotModuleReplacementPlugin(),
 		],
 		output: {
-			path: isEnvProduction ? paths.appBuild : undefined,
-			filename: isEnvProduction
-				? 'simple.min.js'
-				: isEnvDevelopment && 'simple.js',
+			// path: isEnvProduction ? paths.appBuild : undefined,
+			path: paths.appBuild,
+			// filename: isEnvProduction
+			// 	? 'simple.min.js'
+			// 	: isEnvDevelopment && 'simple.js',
+			filename: 'simple.js',
 			library: 'simple',
 		},
 	};

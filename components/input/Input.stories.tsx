@@ -1,36 +1,15 @@
-import { Meta, Story } from '@storybook/react';
-import { css } from '@emotion/css';
+import { storiesOf } from '@storybook/react';
 
-import Input, { InputProps } from './index';
+import Input from './index';
 
-const styles = {
-	group: css({
-		marginTop: 20,
-	}),
-	button: css`
-		margin-right: 10px;
-	`,
-};
-
-export default {
-	title: 'Example/Input',
+storiesOf('Input', module).add('text', () => <Input />, {
 	component: Input,
-} as Meta;
+});
 
-export const Basic: Story<InputProps> = () => {
-	return (
-		<div>
-			<div className={styles.group}>
-				<Input />
-			</div>
+storiesOf('Input', module).add('Search', () => <Input.Search />, {
+	component: Input.Search,
+});
 
-			<div className={styles.group}>
-				<Input disabled />
-			</div>
-
-			<div className={styles.group}>
-				<Input.Search />
-			</div>
-		</div>
-	);
-};
+storiesOf('Input', module).add('disabled', () => <Input disabled />, {
+	component: Input,
+});

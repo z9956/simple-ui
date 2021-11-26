@@ -9,7 +9,7 @@
 		"build-storybook": "build-storybook",
 		"dev": "rm -rf ./dist && node scripts/dev.js",
 		"prepare": "husky install",
-		"storybook": "start-storybook -p 6006"
+		"storybook": "start-storybook -p 9000"
 	},
 	"dependencies": {
 		"@emotion/babel-plugin": "^11.3.0",
@@ -23,7 +23,6 @@
 		"webpack": "^5.64.1"
 	},
 	"devDependencies": {
-		"@mdx-js/loader": "^1.6.22",
 		"@storybook/addon-a11y": "^6.3.12",
 		"@storybook/addon-actions": "^6.3.12",
 		"@storybook/addon-docs": "^6.3.12",

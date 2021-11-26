@@ -34,7 +34,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 			{prefix && prefix}
 			<input type={type} ref={ref} {...otherProps} />
 			{suffix && suffix}
-
 			{children && <span>{children}</span>}
 		</div>
 	);
