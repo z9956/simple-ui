@@ -1,22 +1,26 @@
 const paths = require('./paths');
-const webpack = require('webpack');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = function (webpackEnv) {
 	const isEnvDevelopment = webpackEnv === 'development';
-	// const isEnvProduction = webpackEnv === 'production';
+	const isEnvProduction = webpackEnv === 'production';
+
+	const devServerConfig = {
+		static: paths.appBuild,
+		compress: true,
+		port: 3000,
+		open: true,
+	};
 
 	return {
-		// target: process.env.NODE_ENV === "development" ? "web" : "browserslist",
 		mode: webpackEnv,
-		entry: paths.appIndex,
-		devServer: {
-			static: paths.appBuild,
-		},
+		entry: isEnvDevelopment ? paths.appDev : paths.appIndex,
+		devServer: isEnvDevelopment ? devServerConfig : undefined,
 
 		resolve: {
 			extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`),
 		},
-		externals: [/^react\/.+$/, /^react-dom\/.+$/],
+		externals: isEnvProduction ? [/^react\/.+$/, /^react-dom\/.+$/] : undefined,
 		module: {
 			rules: [
 				{
@@ -57,13 +61,9 @@ module.exports = function (webpackEnv) {
 				},
 			],
 		},
-		plugins: [
-			new webpack.optimize.ModuleConcatenationPlugin(),
-			new webpack.HotModuleReplacementPlugin(),
-		],
+		plugins: [isEnvDevelopment && new ReactRefreshPlugin()].filter(Boolean),
 		output: {
-			// path: isEnvProduction ? paths.appBuild : undefined,
-			path: paths.appBuild,
+			path: isEnvProduction ? paths.appBuild : undefined,
 			// filename: isEnvProduction
 			// 	? 'simple.min.js'
 			// 	: isEnvDevelopment && 'simple.js',

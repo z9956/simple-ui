@@ -24,6 +24,6 @@ module.exports = {
 	appBuild: resolveApp(buildPath),
 	appComponents: resolveApp('components'),
 	appIndex: resolveApp('components/index.tsx'),
-	appSrc: resolveApp('components/dev'),
+	appDev: resolveApp('components/start.tsx'),
 	moduleFileExtensions,
 };

@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const chalk = require('chalk');
 
-const configFactory = require('../config/webpack.config');
+const configFactory = require('../config/webpack.config.js');
 const config = configFactory('production');
 
 console.log(chalk.blue('Creating an optimized production build...'));
