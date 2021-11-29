@@ -6,7 +6,7 @@ import { defaultStyles } from '../styles/default';
 
 export type StyleProps = {
 	size: SizeType;
-	variant?: ButtonTypes;
+	variant: ButtonTypes;
 };
 
 const getButtonColors = (variant: ButtonTypes) => {

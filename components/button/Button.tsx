@@ -26,9 +26,9 @@ export type ButtonProps = BaseButtonProps &
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 	const {
 		variant = 'primary',
+		size = 'md',
 		disabled,
 		className,
-		size,
 		children,
 		...otherProps
 	} = props;
