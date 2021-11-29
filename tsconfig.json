@@ -1,20 +1,18 @@
 {
 	"compilerOptions": {
-		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
-		"declaration": true,
-		"declarationDir": "dist/types/",
+		"target": "es5",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true,
 		"jsx": "react-jsx",
-		"lib": ["es6", "dom"],
-		"module": "ES6",
+		"module": "ESNext",
+		"declaration": true,
+		"declarationDir": "types",
+		"sourceMap": true,
+		"outDir": "dist2",
 		"moduleResolution": "node",
-		"removeComments": true,
-		"target": "es2015",
-		"typeRoots": ["node_modules/@types"],
-		"paths": {
-			"simple-ui": ["components/index.tsx"]
-		}
-	},
-	"include": ["components/**/*.tsx?$"],
-	"exclude": ["node_modules", "dist"]
+		"allowSyntheticDefaultImports": true,
+		"emitDeclarationOnly": true
+	}
 }
