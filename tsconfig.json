@@ -10,7 +10,7 @@
 		"declaration": true,
 		"declarationDir": "types",
 		"sourceMap": true,
-		"outDir": "dist2",
+		"outDir": "dist",
 		"moduleResolution": "node",
 		"allowSyntheticDefaultImports": true,
 		"emitDeclarationOnly": true
