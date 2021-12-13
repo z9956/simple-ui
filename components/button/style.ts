@@ -43,6 +43,7 @@ export const getButtonStyles = (props: StyleProps) => {
 
 	return {
 		button: css({
+			boxSizing: 'border-box',
 			cursor: 'pointer',
 			textAlign: 'center',
 			border: '1px solid transparent',
