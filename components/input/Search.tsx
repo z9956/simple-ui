@@ -1,19 +1,45 @@
-import { forwardRef } from 'react';
+import { forwardRef, ChangeEvent, MouseEvent, KeyboardEvent } from 'react';
 
 import Input, { InputProps } from './Input';
-
-// type NativeAttrs = Omit<InputHTMLAttributes<any>, keyof >
+import { AiOutlineSearch } from 'react-icons/ai';
 
 export type SearchProps = InputProps & {
-	// onSearch?:
+	onSearch?: (
+		value: string,
+		event?:
+			| ChangeEvent<HTMLInputElement>
+			| MouseEvent<HTMLInputElement>
+			| KeyboardEvent<HTMLInputElement>,
+	) => void;
 };
 
 const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
-	const { className, ...otherProps } = props;
+	const { className, onChange, onSearch, ...otherProps } = props;
 
-	// const inputRef = useRef<HTMLInputElement>(null);
+	const handleSearch = (
+		e: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLInputElement>,
+	) => {
+		onSearch?.(e.currentTarget.value, e);
+	};
 
-	return <Input className={className} ref={ref} {...otherProps} />;
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target && e.target.type === 'click' && onSearch) {
+			onSearch(e.currentTarget.value, e);
+		} else {
+			onChange?.(e);
+		}
+	};
+
+	return (
+		<Input
+			className={className}
+			suffix={<AiOutlineSearch />}
+			ref={ref}
+			onChange={handleChange}
+			onPressEnter={handleSearch}
+			{...otherProps}
+		/>
+	);
 });
 
 Search.displayName = 'Search';

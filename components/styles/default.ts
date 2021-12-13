@@ -10,4 +10,5 @@ export const defaultStyles = {
 	defaultColor: '#000000d9',
 	disabled: '#fafafa',
 	disabledBorder: '#eaeaea',
+	defaultBorder: '#d9d9d9',
 };

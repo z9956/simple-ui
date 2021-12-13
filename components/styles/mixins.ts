@@ -1,4 +1,12 @@
-import { CSSObject } from '@emotion/css';
+import { CSSObject, css } from '@emotion/css';
+
+export const pointer = css`
+	cursor: pointer;
+`;
+
+export const notAllowed = css`
+	cursor: not-allowed;
+`;
 
 export const flex = ({
 	justifyContent = 'space-between',
