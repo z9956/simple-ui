@@ -1,7 +1,6 @@
 import { css, cx } from '@emotion/css';
 
 import { defaultStyles } from '../styles/default';
-import { notAllowed } from '../styles/mixins';
 
 export const getInputStyles = ({ width }: { width: number | string }) => {
 	const disabledStyles = {
@@ -21,12 +20,7 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 		padding: 0;
 		line-height: 1;
 		cursor: pointer;
-		position: relative;
 		z-index: 1;
-
-		> svg {
-			//pointer-events: none;
-		}
 	`;
 
 	return {
@@ -41,23 +35,28 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 				box-sizing: border-box;
 				border: 1px solid ${defaultStyles.defaultBorder};
 				border-radius: 2px;
-				padding: 4px 11px;
+
+				&:focus {
+					caret-color: transparent;
+					border: 1px solid ${defaultStyles.primary};
+				}
 
 				> input {
 					width: 100%;
 					height: 100%;
-
-					border: none;
+					padding: 4px 11px;
+					caret-color: transparent;
+					border: 1px solid transparent;
 
 					&:focus {
 						outline: none;
+						caret-color: black;
 						border-color: ${defaultStyles.primary};
 					}
 				}
 			`,
 		),
 		disabled: css({
-			notAllowed,
 			...disabledStyles,
 		}),
 		prefix: cx(
@@ -75,7 +74,21 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 			css`
 				width: 32px;
 				cursor: pointer;
+				height: 100%;
+				//border-left: 1px solid ${defaultStyles.defaultBorder};
 			`,
 		),
+		clear: cx(
+			prefixStyles,
+
+			css`
+				width: 20px;
+
+				> svg {
+					pointer-events: auto;
+				}
+			`,
+		),
+		focused: css``,
 	};
 };

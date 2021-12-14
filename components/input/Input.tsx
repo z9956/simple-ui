@@ -10,6 +10,7 @@ import {
 	ChangeEvent,
 	KeyboardEvent,
 	MouseEvent,
+	FocusEvent,
 } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { cx } from '@emotion/css';
@@ -40,7 +41,7 @@ export function triggerFocus(ele?: HTMLInputElement, options?: FocusOptions) {
 	const len = ele.value.length;
 
 	if (len) {
-		ele.setSelectionRange(0, len);
+		ele.setSelectionRange(len, len);
 	} else {
 		ele.setSelectionRange(0, 0);
 	}
@@ -68,9 +69,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 		readOnly,
 		defaultValue = '',
 		onBlur,
+		onFocus,
 		onChange,
 		onKeyDown,
 		onPressEnter,
+		autoComplete,
 		prefix,
 		size,
 		style,
@@ -80,6 +83,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 	} = props;
 
 	const [inputValue, setInputValue] = useState<string>(defaultValue);
+	const [focused, setFocused] = useState<boolean>(false);
 	const isControlledComponent = useMemo(() => value !== undefined, [value]);
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -87,13 +91,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 	const inputWidth = width ?? style?.width;
 	const styles = getInputStyles({ width: inputWidth });
-
-	const inputClass = cx(
-		styles.input,
-		disabled && styles.disabled,
-		Boolean(suffix ?? allowClear) && styles.wrap,
-		className,
-	);
 
 	const handleClear = (e: MouseEvent<SVGElement>) => {
 		e.preventDefault();
@@ -113,15 +110,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 	const focus = () => {
 		if (inputRef && inputRef.current) {
-			// triggerFocus(inputRef.current);
-			inputRef.current.focus();
+			triggerFocus(inputRef.current);
+			// inputRef.current.focus()
 		}
 	};
 
 	const renderClearIcon = () => {
 		if (allowClear && inputRef.current && inputRef.current.value !== '') {
 			return (
-				<span className={styles.suffix}>
+				<span className={styles.clear}>
 					<AiOutlineClose onClick={handleClear} />
 				</span>
 			);
@@ -143,6 +140,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 		onKeyDown?.(e);
 	};
 
+	const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+		setFocused(true);
+
+		focus();
+
+		onFocus?.(e);
+	};
+
+	const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+		// setFocused(false)
+		onBlur?.(e);
+	};
+
+	const handleSuffix = () => {
+		// focus();
+	};
+
 	useEffect(() => {
 		if (isControlledComponent) setInputValue(value as string);
 	});
@@ -156,21 +170,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 		...controlledValue,
 	};
 
+	const inputClass = cx(
+		styles.input,
+		disabled && styles.disabled,
+		Boolean(suffix ?? allowClear) && styles.wrap,
+		focused && styles.focused,
+		className,
+	);
+
 	return (
-		<div className={inputClass} style={style}>
+		<div className={inputClass} style={style} onBlur={() => setFocused(false)}>
 			{prefix && <span className={styles.prefix}>{prefix}</span>}
 			<input
 				type={type}
 				ref={inputRef}
 				disabled={disabled}
 				readOnly={readOnly}
+				autoComplete={autoComplete}
 				onChange={handleChange}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
 				onKeyDown={handleKeyDown}
 				{...inputProps}
 			/>
 			{allowClear && renderClearIcon()}
 			{suffix && (
-				<span onClick={focus} className={styles.suffix}>
+				<span onClick={handleSuffix} className={styles.suffix}>
 					{suffix}
 				</span>
 			)}

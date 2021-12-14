@@ -4,7 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
 
-import Input, { InputProps, SearchProps } from './index';
+import Input, { InputProps, SearchProps, PasswordProps } from './index';
 
 const styles = {
 	group: css({
@@ -48,6 +48,20 @@ export const Text: Story<InputProps> = () => {
 				onChange={handleChange}
 				onPressEnter={handlePressEnter}
 			/>
+		</div>
+	);
+};
+
+export const Password: Story<PasswordProps> = () => {
+	return (
+		<div>
+			<Input.Password
+				className={styles.group}
+				style={{ width: 300 }}
+				disabled
+				defaultValue={'defaultValue'}
+			/>
+			<Input.Search className={styles.group} style={{ width: 300 }} />
 		</div>
 	);
 };
