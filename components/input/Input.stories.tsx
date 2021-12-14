@@ -61,7 +61,11 @@ export const Password: Story<PasswordProps> = () => {
 				disabled
 				defaultValue={'defaultValue'}
 			/>
-			<Input.Search className={styles.group} style={{ width: 300 }} />
+			<Input.Password
+				defaultValue={'defaultValue'}
+				className={styles.group}
+				style={{ width: 300 }}
+			/>
 		</div>
 	);
 };
