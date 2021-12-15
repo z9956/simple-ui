@@ -13,4 +13,3 @@
 - [ant-design](https://github.com/ant-design/ant-design)
 - [emotion](https://github.com/emotion-js/emotion)
 - [react-icons](https://github.com/react-icons/react-icons)
-- [swc](https://github.com/swc-project/swc)
