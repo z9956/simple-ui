@@ -24,35 +24,17 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 	`;
 
 	return {
-		wrap: css`
-			padding-right: 0;
-		`,
 		input: cx(
 			css`
 				display: flex;
 				align-items: center;
 				width: ${width ? width : '100%'};
-				box-sizing: border-box;
 				border: 1px solid ${defaultStyles.defaultBorder};
 				border-radius: 2px;
 
-				&:focus {
-					caret-color: transparent;
-					border: 1px solid ${defaultStyles.primary};
-				}
-
-				> input {
-					width: 100%;
-					height: 100%;
-					padding: 4px 11px;
-					caret-color: transparent;
-					border: 1px solid transparent;
-
-					&:focus {
-						outline: none;
-						caret-color: black;
-						border-color: ${defaultStyles.primary};
-					}
+				&,
+				* {
+					box-sizing: border-box;
 				}
 			`,
 		),
@@ -75,7 +57,6 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 				width: 32px;
 				cursor: pointer;
 				height: 100%;
-				//border-left: 1px solid ${defaultStyles.defaultBorder};
 			`,
 		),
 		clear: cx(
@@ -89,6 +70,29 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 				}
 			`,
 		),
-		focused: css``,
+
+		inputWarp: css`
+			width: 100%;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			padding-left: 10px;
+			border: 1px solid transparent;
+
+			> input {
+				width: 100%;
+				height: 100%;
+				//caret-color: transparent;
+				border: none;
+
+				&:focus {
+					outline: none;
+					caret-color: black;
+				}
+			}
+		`,
+		focused: css`
+			border-color: ${defaultStyles.primary};
+		`,
 	};
 };

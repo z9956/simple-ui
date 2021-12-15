@@ -7,6 +7,9 @@ import { css } from '@emotion/css';
 import Input, { InputProps, SearchProps, PasswordProps } from './index';
 
 const styles = {
+	wrap: css`
+		caret-color: transparent;
+	`,
 	group: css({
 		marginTop: 20,
 	}),
@@ -27,7 +30,7 @@ export const Text: Story<InputProps> = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.wrap}>
 			<Input
 				className={styles.group}
 				disabled
@@ -54,7 +57,7 @@ export const Text: Story<InputProps> = () => {
 
 export const Password: Story<PasswordProps> = () => {
 	return (
-		<div>
+		<div className={styles.wrap}>
 			<Input.Password
 				className={styles.group}
 				style={{ width: 300 }}
@@ -76,7 +79,7 @@ export const Search: Story<SearchProps> = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.wrap}>
 			<Input.Search
 				className={styles.group}
 				style={{ width: 300 }}

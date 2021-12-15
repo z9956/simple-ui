@@ -89,9 +89,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
-	const inputWidth = width ?? style?.width;
-	const styles = getInputStyles({ width: inputWidth });
-
 	const handleClear = (e: MouseEvent<SVGElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -123,6 +120,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 				</span>
 			);
 		}
+
+		return <span className={styles.clear} />;
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -149,12 +148,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 	};
 
 	const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-		// setFocused(false)
+		setFocused(false);
 		onBlur?.(e);
 	};
 
-	const handleSuffix = () => {
-		// focus();
+	const handleSuffix = (e: MouseEvent<HTMLSpanElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
 	};
 
 	useEffect(() => {
@@ -170,30 +170,35 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 		...controlledValue,
 	};
 
-	const inputClass = cx(
-		styles.input,
-		disabled && styles.disabled,
-		Boolean(suffix ?? allowClear) && styles.wrap,
+	const inputWidth = width ?? style?.width;
+	const styles = getInputStyles({ width: inputWidth });
+
+	const inputClass = cx(styles.input, disabled && styles.disabled, className);
+
+	const inputWarp = cx(
+		styles.focused,
+		styles.inputWarp,
 		focused && styles.focused,
-		className,
 	);
 
 	return (
-		<div className={inputClass} style={style} onBlur={() => setFocused(false)}>
-			{prefix && <span className={styles.prefix}>{prefix}</span>}
-			<input
-				type={type}
-				ref={inputRef}
-				disabled={disabled}
-				readOnly={readOnly}
-				autoComplete={autoComplete}
-				onChange={handleChange}
-				onFocus={handleFocus}
-				onBlur={handleBlur}
-				onKeyDown={handleKeyDown}
-				{...inputProps}
-			/>
-			{allowClear && renderClearIcon()}
+		<div className={inputClass} style={style}>
+			<span className={inputWarp}>
+				{prefix && <span className={styles.prefix}>{prefix}</span>}
+				<input
+					type={type}
+					ref={inputRef}
+					disabled={disabled}
+					readOnly={readOnly}
+					autoComplete={autoComplete}
+					onChange={handleChange}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					onKeyDown={handleKeyDown}
+					{...inputProps}
+				/>
+				{allowClear && renderClearIcon()}
+			</span>
 			{suffix && (
 				<span onClick={handleSuffix} className={styles.suffix}>
 					{suffix}
