@@ -62,15 +62,15 @@ const Checkbox: FC<CheckboxProps> = (props) => {
 
 	const isDisabled = inGroup ? disabledAll || disabled : disabled;
 
-	if (inGroup) {
-		useEffect(() => {
+	useEffect(() => {
+		if (inGroup) {
 			const next = values.includes(value);
 
 			if (next !== selfChecked) {
 				setSelfChecked(next);
 			}
-		}, [values.join(',')]);
-	}
+		}
+	}, [values.join(','), inGroup]);
 
 	const styles = getCheckboxStyles();
 
