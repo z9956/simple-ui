@@ -38,12 +38,22 @@ export const Group: Story<CheckboxGroupProps> = () => {
 	};
 
 	return (
-		<Checkbox.Group value={['a']} onChange={handleGroupChange}>
-			<Checkbox value={'a'}>a</Checkbox>
-			<Checkbox value={'b'}>b</Checkbox>
-			<Checkbox value={'c'}>c</Checkbox>
-			<Checkbox value={1}>1</Checkbox>
-			<Checkbox value={2}>2</Checkbox>
-		</Checkbox.Group>
+		<div>
+			<Checkbox.Group value={['a']} disabled>
+				<Checkbox value={'a'}>a</Checkbox>
+				<Checkbox value={'b'}>b</Checkbox>
+				<Checkbox value={'c'}>c</Checkbox>
+				<Checkbox value={1}>1</Checkbox>
+				<Checkbox value={2}>2</Checkbox>
+			</Checkbox.Group>
+
+			<Checkbox.Group value={['a']} onChange={handleGroupChange}>
+				<Checkbox value={'a'}>a</Checkbox>
+				<Checkbox value={'b'}>b</Checkbox>
+				<Checkbox value={'c'}>c</Checkbox>
+				<Checkbox value={1}>1</Checkbox>
+				<Checkbox value={2}>2</Checkbox>
+			</Checkbox.Group>
+		</div>
 	);
 };
