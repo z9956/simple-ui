@@ -9,3 +9,6 @@ export { default as Avatar } from './avatar';
 
 export type { CheckboxProps, CheckboxGroupProps } from './checkbox';
 export { default as Checkbox } from './checkbox';
+
+export type { RadioProps, RadioGroupProps } from './radio';
+export { default as Radio } from './radio';
