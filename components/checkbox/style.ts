@@ -25,15 +25,12 @@ export const getCheckboxStyles = () => {
 		disabled: css`
 			cursor: not-allowed;
 			color: ${defaultStyles.disabledColor};
-			background-color: ${defaultStyles.disabled};
 
 			input[type='checkbox'] {
 				cursor: not-allowed;
 				background-color: ${defaultStyles.disabled};
 			}
 		`,
-
-		checkbox: css``,
 		label: css`
 			padding: 0 8px;
 			font-size: 14px;

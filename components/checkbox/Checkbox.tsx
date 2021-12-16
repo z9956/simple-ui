@@ -102,8 +102,10 @@ const Checkbox: FC<CheckboxProps> = (props) => {
 	}, [checked]);
 
 	return (
-		<label className={cx(styles.wrap, disabled && styles.disabled, className)}>
-			<span className={styles.checkbox}>
+		<label
+			className={cx(styles.wrap, isDisabled && styles.disabled, className)}
+		>
+			<span>
 				<input
 					type="checkbox"
 					checked={selfChecked}

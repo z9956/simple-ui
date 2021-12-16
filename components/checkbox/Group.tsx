@@ -48,7 +48,6 @@ const Group: FC<CheckboxGroupProps> = (props) => {
 					css`
 						width: auto;
 						box-sizing: border-box;
-						display: inline-block;
 
 						> label {
 							margin-right: 8px;
