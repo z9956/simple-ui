@@ -22,11 +22,13 @@ export default {
 
 export const Text: Story<InputProps> = () => {
 	const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-		console.log(action(`onPressEnter ${e.currentTarget.value}`));
+		console.log(e.currentTarget.value);
+		action(`onPressEnter`)(e);
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		console.log(action(`onChange ${e.currentTarget.value}`));
+		console.log(e.currentTarget.value);
+		action(`onChange`)(e);
 	};
 
 	return (
@@ -42,6 +44,8 @@ export const Text: Story<InputProps> = () => {
 				suffix={<AiOutlineBulb />}
 				defaultValue={'defaultValue'}
 				style={{ width: 300 }}
+				onChange={handleChange}
+				onPressEnter={handlePressEnter}
 			/>
 			<Input
 				className={styles.group}
@@ -76,6 +80,7 @@ export const Password: Story<PasswordProps> = () => {
 export const Search: Story<SearchProps> = () => {
 	const handleSearch = (value: string) => {
 		console.log(`handleSearch ${value}`);
+		action(`onSearch`)(value);
 	};
 
 	return (
