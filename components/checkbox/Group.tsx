@@ -28,8 +28,6 @@ const Group: FC<CheckboxGroupProps> = (props) => {
 		setSelfValue(next);
 
 		onChange?.(next);
-
-		console.log(removed, next, val);
 	};
 
 	const providerValue = {
