@@ -12,3 +12,6 @@ export { default as Checkbox } from './checkbox';
 
 export type { RadioProps, RadioGroupProps } from './radio';
 export { default as Radio } from './radio';
+
+export type { UploadProps } from './upload';
+export { default as Upload } from './upload';

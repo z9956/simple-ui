@@ -31,15 +31,16 @@ const getButtonColors = (variant: ButtonTypes) => {
 	return colors[variant];
 };
 
+export const disabledStyles = {
+	borderColor: defaultStyles.disabled,
+	color: defaultStyles.disabledColor,
+	background: defaultStyles.disabledBorder,
+};
+
 export const getButtonStyles = (props: StyleProps) => {
 	const { size, variant } = props;
 	const sizeStyles = getButtonSize(size);
 	const variantStyles = getButtonColors(variant);
-	const disabledStyles = {
-		borderColor: defaultStyles.disabled,
-		color: defaultStyles.disabledColor,
-		background: defaultStyles.disabledBorder,
-	};
 
 	return {
 		button: cx(
@@ -54,8 +55,6 @@ export const getButtonStyles = (props: StyleProps) => {
 				...variantStyles,
 			}),
 			css`
-				font-size: ${defaultStyles.fontSize};
-
 				&[disabled] {
 					cursor: not-allowed;
 					${css({ ...disabledStyles })};
