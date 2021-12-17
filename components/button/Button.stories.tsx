@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { AiOutlineUpload, AiOutlineFileSearch } from 'react-icons/ai';
 import { css } from '@emotion/css';
 
 import Button, { ButtonProps } from '../button';
@@ -48,6 +49,21 @@ export const Basic: Story<ButtonProps> = () => {
 						</div>
 					);
 				})}
+				<div className={styles.group}>
+					<Button className={styles.button} icon={<AiOutlineUpload />} disabled>
+						上传
+					</Button>
+					<Button className={styles.button} icon={<AiOutlineUpload />}>
+						上传
+					</Button>
+					<Button
+						className={styles.button}
+						icon={<AiOutlineFileSearch />}
+						variant={'secondary'}
+					>
+						搜索
+					</Button>
+				</div>
 				<div className={styles.group}>
 					<Button variant="primary" disabled>
 						disabled

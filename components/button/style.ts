@@ -1,4 +1,4 @@
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 
 import { SizeType } from '../config/size';
 import { ButtonTypes } from './Button';
@@ -37,22 +37,34 @@ export const getButtonStyles = (props: StyleProps) => {
 	const variantStyles = getButtonColors(variant);
 	const disabledStyles = {
 		borderColor: defaultStyles.disabled,
-		color: '#ccc',
+		color: defaultStyles.disabledColor,
 		background: defaultStyles.disabledBorder,
 	};
 
 	return {
-		button: css({
-			boxSizing: 'border-box',
-			cursor: 'pointer',
-			textAlign: 'center',
-			border: '1px solid transparent',
-			borderRadius: '5px',
-			...sizeStyles,
-			...variantStyles,
-			':disabled': disabledStyles,
-			'&[disabled]': disabledStyles,
-		}),
+		button: cx(
+			css({
+				boxSizing: 'border-box',
+				cursor: 'pointer',
+				userSelect: 'none',
+				textAlign: 'center',
+				border: '1px solid transparent',
+				borderRadius: '5px',
+				...sizeStyles,
+				...variantStyles,
+			}),
+			css`
+				&[disabled] {
+					cursor: not-allowed;
+					${css({ ...disabledStyles })};
+				}
+			`,
+		),
+		icon: css`
+			display: inline-flex;
+			margin-right: 8px;
+			vertical-align: -0.125em;
+		`,
 	};
 };
 

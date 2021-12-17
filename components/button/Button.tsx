@@ -13,10 +13,8 @@ export interface BaseButtonProps {
 	variant?: ButtonTypes;
 	icon?: ReactNode;
 	size?: SizeType;
-	loading?: boolean | { delay?: number };
-	prefixCls?: string;
+	// loading?: boolean | { delay?: number };
 	className?: string;
-	block?: boolean;
 	children?: ReactNode;
 }
 
@@ -27,6 +25,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 	const {
 		variant = 'primary',
 		size = 'md',
+		icon,
 		disabled,
 		className,
 		children,
@@ -45,6 +44,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 			ref={ref}
 			{...otherProps}
 		>
+			{icon && <span className={styles.icon}>{icon}</span>}
 			{children && <span>{children}</span>}
 		</button>
 	);
