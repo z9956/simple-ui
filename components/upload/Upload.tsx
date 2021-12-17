@@ -1,12 +1,4 @@
-import {
-	FC,
-	ReactNode,
-	FormEvent,
-	MouseEvent,
-	useRef,
-	useState,
-	useCallback,
-} from 'react';
+import { FC, ReactNode, FormEvent, useRef, useState, useCallback } from 'react';
 import { cx } from '@emotion/css';
 import { AiFillDelete } from 'react-icons/all';
 
@@ -81,13 +73,16 @@ export const Upload: FC<UploadProps> = ({
 		[onChange, files],
 	);
 
-	const handleClick = (e: MouseEvent<HTMLSpanElement>) => {
+	const handleClick = () => {
 		const el = inputRef.current;
 
 		el?.click();
 	};
 
 	const handleRemoveFile = (index: number) => {
+		const file = files[index];
+		onRemove?.(file);
+
 		files.splice(index, 1);
 		setFiles([...files]);
 	};

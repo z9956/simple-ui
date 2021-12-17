@@ -22,8 +22,9 @@ export default {
 } as Meta;
 
 export const Base: Story<UploadProps> = () => {
-	const handleRemoveFile = (e: UploadFile) => {
-		action(`onRemove`)(e);
+	const handleRemoveFile = (file: UploadFile) => {
+		console.log(file);
+		action(`onRemove`)(file);
 	};
 
 	const handleUpload = (e: FormEvent<HTMLInputElement>) => {
@@ -41,7 +42,11 @@ export const Base: Story<UploadProps> = () => {
 				</Upload>
 			</div>
 			<div>
-				<Upload onChange={handleUpload} maxCount={2}>
+				<Upload
+					onChange={handleUpload}
+					maxCount={2}
+					onRemove={handleRemoveFile}
+				>
 					<Button icon={<AiOutlineUpload />} variant={'secondary'}>
 						上传文件数量限制为2
 					</Button>
@@ -55,7 +60,12 @@ export const Base: Story<UploadProps> = () => {
 				</Upload>
 			</div>
 			<div>
-				<Upload onChange={handleUpload} multiple maxCount={3}>
+				<Upload
+					onChange={handleUpload}
+					multiple
+					maxCount={3}
+					onRemove={handleRemoveFile}
+				>
 					<Button icon={<AiOutlineUpload />} variant={'secondary'}>
 						multiple maxCount: 3
 					</Button>
