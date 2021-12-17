@@ -7,6 +7,7 @@ export const getCheckboxStyles = () => {
 			display: inline-flex;
 			height: 16px;
 			cursor: pointer;
+			font-size: ${defaultStyles.fontSize};
 
 			&,
 			* {
@@ -33,10 +34,10 @@ export const getCheckboxStyles = () => {
 		`,
 		label: css`
 			padding: 0 8px;
-			font-size: 14px;
 			user-select: none;
 			display: inline-flex;
 			align-items: center;
+			font-size: ${defaultStyles.fontSize};
 		`,
 	};
 };

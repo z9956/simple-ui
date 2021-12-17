@@ -1,4 +1,5 @@
 export const defaultStyles = {
+	fontSize: '14px',
 	background: '#fff',
 	border: '#eaeaea',
 	error: '#e00',
@@ -12,4 +13,5 @@ export const defaultStyles = {
 	disabled: '#fafafa',
 	disabledColor: '#ccc',
 	disabledBorder: '#eaeaea',
+	hoverColor: '#f5f5f5',
 };

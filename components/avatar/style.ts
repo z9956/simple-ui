@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { defaultStyles } from '../styles/default';
 
 export const getAvatarStyles = ({ square }: { square: boolean }) => {
 	return {
@@ -9,6 +10,7 @@ export const getAvatarStyles = ({ square }: { square: boolean }) => {
 			border-radius: ${square ? 0 : '50%'};
 			overflow: hidden;
 			position: relative;
+			font-size: ${defaultStyles.fontSize};
 
 			&,
 			* {

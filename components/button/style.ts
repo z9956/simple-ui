@@ -54,6 +54,8 @@ export const getButtonStyles = (props: StyleProps) => {
 				...variantStyles,
 			}),
 			css`
+				font-size: ${defaultStyles.fontSize};
+
 				&[disabled] {
 					cursor: not-allowed;
 					${css({ ...disabledStyles })};

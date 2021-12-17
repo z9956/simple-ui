@@ -21,6 +21,7 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 		line-height: 1;
 		cursor: pointer;
 		z-index: 1;
+		font-size: ${defaultStyles.fontSize};
 	`;
 
 	return {
@@ -31,6 +32,7 @@ export const getInputStyles = ({ width }: { width: number | string }) => {
 				width: ${width ? width : '100%'};
 				border: 1px solid ${defaultStyles.defaultBorder};
 				border-radius: 2px;
+				font-size: ${defaultStyles.fontSize};
 
 				&,
 				* {
