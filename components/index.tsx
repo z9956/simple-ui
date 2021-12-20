@@ -15,3 +15,6 @@ export { default as Radio } from './radio';
 
 export type { UploadProps } from './upload';
 export { default as Upload } from './upload';
+
+export type { TooltipProps } from './tooltip';
+export { default as Tooltip } from './tooltip';
