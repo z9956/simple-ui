@@ -2,7 +2,7 @@ import { FC, ReactNode, FormEvent, useRef, useState, useCallback } from 'react';
 import { cx } from '@emotion/css';
 import { AiFillDelete } from 'react-icons/all';
 
-import { getId } from '../../utils/collections';
+import { getId } from '../utils/collections';
 import { getUploadStyles } from './style';
 
 export interface UploadFile extends File {
