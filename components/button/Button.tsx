@@ -23,7 +23,7 @@ export type ButtonProps = BaseButtonProps &
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 	const {
-		variant = 'primary',
+		variant = 'secondary',
 		size = 'md',
 		icon,
 		disabled,
