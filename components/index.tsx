@@ -21,3 +21,6 @@ export { default as Tooltip } from './tooltip';
 
 export type { TextareaProps } from './textarea';
 export { default as Textarea } from './textarea';
+
+export type { ModalProps } from './modal';
+export { default as Modal } from './modal';

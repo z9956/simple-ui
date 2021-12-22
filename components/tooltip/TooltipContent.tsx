@@ -9,8 +9,9 @@ import {
 } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { createPortal } from 'react-dom';
-import { css, cx, injectGlobal } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 
+import { TIMEOUT } from '../utils/constant';
 import { TooltipPlacement } from './Tooltip';
 import usePortal from '../utils/usePortal';
 import {
@@ -21,26 +22,7 @@ import {
 } from './placement';
 import { defaultStyles } from '../styles/default';
 import useResize from '../utils/useResize';
-
-injectGlobal`
-  .my-node-enter {
-    opacity: 0;
-  }
-
-  .my-node-enter-active {
-    opacity: 1;
-    transition: opacity 200ms;
-  }
-
-  .my-node-exit {
-    opacity: 1;
-  }
-
-  .my-node-exit-active {
-    opacity: 0;
-    transition: opacity 200ms;
-  }
-`;
+import '../styles/transition';
 
 export type TooltipContentProps = {
 	visible: boolean;
@@ -132,7 +114,7 @@ const TooltipContent: FC<TooltipContentProps> = ({
 
 	if (!el) return null;
 	return createPortal(
-		<CSSTransition in={visible} timeout={200} classNames="my-node">
+		<CSSTransition in={visible} timeout={TIMEOUT} classNames="my-node">
 			<div
 				onClick={preventHandler}
 				style={overlayStyle}
