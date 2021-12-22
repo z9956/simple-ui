@@ -4,6 +4,7 @@ import {
 	MutableRefObject,
 	useEffect,
 	useState,
+	useMemo,
 	MouseEvent,
 } from 'react';
 import { CSSTransition } from 'react-transition-group';
@@ -14,6 +15,7 @@ import { TooltipPlacement } from './Tooltip';
 import usePortal from '../utils/usePortal';
 import {
 	defaultTooltipPosition,
+	getArrowPosition,
 	getPosition,
 	TooltipPosition,
 } from './placement';
@@ -84,6 +86,13 @@ export const getRect = (
 	};
 };
 
+const arrowOffset = {
+	x: '0.75em',
+	y: '0.75em',
+};
+
+const offset = 12;
+
 const TooltipContent: FC<TooltipContentProps> = ({
 	visible,
 	color,
@@ -93,13 +102,18 @@ const TooltipContent: FC<TooltipContentProps> = ({
 	overlayClassName,
 	parent,
 }) => {
-	const [rect, setRect] = useState<TooltipPosition>(defaultTooltipPosition);
 	const el = usePortal('tooltip');
+	const [rect, setRect] = useState<TooltipPosition>(defaultTooltipPosition);
+
+	const arrowPosition = useMemo(
+		() => getArrowPosition(placement, arrowOffset.x, arrowOffset.y),
+		[placement],
+	);
 
 	if (!parent) return null;
 
 	const updateRect = () => {
-		const position = getPosition(placement, getRect(parent));
+		const position = getPosition(placement, getRect(parent), offset);
 		setRect(position);
 	};
 
@@ -116,8 +130,6 @@ const TooltipContent: FC<TooltipContentProps> = ({
 		event.nativeEvent.stopImmediatePropagation();
 	};
 
-	console.log(el);
-
 	if (!el) return null;
 	return createPortal(
 		<CSSTransition in={visible} timeout={200} classNames="my-node">
@@ -128,7 +140,7 @@ const TooltipContent: FC<TooltipContentProps> = ({
 					css`
 						width: auto;
 						height: auto;
-						//display: ${visible ? 'block' : 'none'};
+						display: ${visible ? 'block' : 'none'};
 						position: absolute;
 						top: ${rect.top};
 						left: ${rect.left};
@@ -149,8 +161,27 @@ const TooltipContent: FC<TooltipContentProps> = ({
 					className={css`
 						box-sizing: border-box;
 						position: relative;
+						height: 100%;
 					`}
 				>
+					<span
+						className={css`
+							width: 0;
+							height: 0;
+							border-style: solid;
+							border-width: 6px 6px 0 6px;
+							box-sizing: border-box;
+							position: absolute;
+							top: ${arrowPosition.top};
+							right: ${arrowPosition.right};
+							left: ${arrowPosition.left};
+							bottom: ${arrowPosition.bottom};
+							transform: ${arrowPosition.transform};
+							border-color: transparent ${color ?? 'rgba(0, 0, 0, 0.75)'}
+								transparent transparent;
+							pointer-events: none;
+						`}
+					/>
 					{title}
 				</div>
 			</div>

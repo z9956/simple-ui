@@ -11,8 +11,6 @@ export default {
 
 const title = '文字提示气泡框';
 
-const buttonWidth = 70;
-
 export const Base: Story<TooltipProps> = () => {
 	const handleVisibleChange = (e: boolean) => {
 		console.log(e);
@@ -20,69 +18,107 @@ export const Base: Story<TooltipProps> = () => {
 	};
 
 	return (
-		<div
-			className={css`
-				width: 500px;
-				height: 500px;
-				margin: 50px auto;
-				> div > div {
-					width: 70px;
-					button {
-						width: 70px;
-					}
-				}
-			`}
-		>
-			<div style={{ marginLeft: buttonWidth }}>
+		<div>
+			<div
+				className={css`
+					width: 500px;
+					margin: 0 auto;
+				`}
+			>
 				<Tooltip
-					placement="topLeft"
+					placement={'bottom'}
 					title={title}
-					color={'orange'}
+					color={'blue'}
+					trigger={'click'}
 					onVisibleChange={handleVisibleChange}
 				>
-					<Button>TL</Button>
+					<Button>Tooltip click</Button>
 				</Tooltip>
-				<Tooltip placement="top" title={title} color={'red'}>
-					<Button>Top</Button>
-				</Tooltip>
-				<Tooltip placement="topRight" title={title}>
-					<Button>TR</Button>
-				</Tooltip>
-			</div>
-			<div style={{ width: buttonWidth, float: 'left' }}>
-				<Tooltip placement="leftTop" title={title}>
-					<Button>LT</Button>
-				</Tooltip>
-				<Tooltip placement="left" title={title}>
-					<Button>Left</Button>
-				</Tooltip>
-				<Tooltip placement="leftBottom" title={title}>
-					<Button>LB</Button>
+				<Tooltip
+					placement={'bottomRight'}
+					title={title}
+					color={'orange'}
+					trigger={'contextMenu'}
+					onVisibleChange={handleVisibleChange}
+				>
+					<Button>Tooltip contextMenu</Button>
 				</Tooltip>
 			</div>
-			<div style={{ width: buttonWidth, marginLeft: buttonWidth * 4 + 24 }}>
-				<Tooltip placement="rightTop" title={title}>
-					<Button>RT</Button>
-				</Tooltip>
-				<Tooltip placement="right" title={title}>
-					<Button>Right</Button>
-				</Tooltip>
-				<Tooltip placement="rightBottom" title={title}>
-					<Button>RB</Button>
-				</Tooltip>
-			</div>
+
 			<div
-				style={{ marginLeft: buttonWidth, clear: 'both', whiteSpace: 'nowrap' }}
+				className={css`
+					width: 500px;
+					height: 500px;
+					margin: 50px auto;
+
+					> div > div {
+						width: 70px;
+						height: 32px;
+						display: inline-block;
+
+						button {
+							width: 70px;
+						}
+					}
+				`}
 			>
-				<Tooltip placement="bottomLeft" title={title}>
-					<Button>BL</Button>
-				</Tooltip>
-				<Tooltip placement="bottom" title={title}>
-					<Button>Bottom</Button>
-				</Tooltip>
-				<Tooltip placement="bottomRight" title={title}>
-					<Button>BR</Button>
-				</Tooltip>
+				<div>
+					<div />
+					<Tooltip placement="topLeft" title={title} color={'blue'}>
+						<Button>TL</Button>
+					</Tooltip>
+					<Tooltip placement="top" title={title} color={'orange'}>
+						<Button>Top</Button>
+					</Tooltip>
+					<Tooltip placement="topRight" title={title} color={'gray'}>
+						<Button>TR</Button>
+					</Tooltip>
+				</div>
+				<div>
+					<Tooltip placement="leftTop" title={title}>
+						<Button>LT</Button>
+					</Tooltip>
+					<div />
+					<div />
+					<div />
+					<Tooltip placement="rightTop" title={title}>
+						<Button>RT</Button>
+					</Tooltip>
+				</div>
+				<div>
+					<Tooltip placement="left" title={title}>
+						<Button>Left</Button>
+					</Tooltip>
+					<div />
+					<div />
+					<div />
+					<Tooltip placement="right" title={title}>
+						<Button>Right</Button>
+					</Tooltip>
+				</div>
+				<div>
+					<Tooltip placement="leftBottom" title={title}>
+						<Button>LB</Button>
+					</Tooltip>
+					<div />
+					<div />
+					<div />
+					<Tooltip placement="rightBottom" title={title}>
+						<Button>RB</Button>
+					</Tooltip>
+				</div>
+				<div>
+					<div />
+					<Tooltip placement="bottomLeft" title={title}>
+						<Button>BL</Button>
+					</Tooltip>
+					<Tooltip placement="bottom" title={title}>
+						<Button>Bottom</Button>
+					</Tooltip>
+					<Tooltip placement="bottomRight" title={title}>
+						<Button>BR</Button>
+					</Tooltip>
+				</div>
 			</div>
 		</div>
 	);

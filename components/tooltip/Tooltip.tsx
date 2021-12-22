@@ -4,6 +4,7 @@ import {
 	PropsWithChildren,
 	CSSProperties,
 	HTMLAttributes,
+	MouseEvent,
 	useState,
 	useRef,
 	useEffect,
@@ -11,6 +12,7 @@ import {
 
 import TooltipContent from './TooltipContent';
 import { css } from '@emotion/css';
+import useClickAway from '../utils/useClickAway';
 
 type TooltipTriggers = 'hover' | 'click' | 'contextMenu';
 
@@ -38,6 +40,8 @@ export interface BaseTooltipProps {
 	overlayClassName?: string;
 	defaultVisible?: boolean;
 	onVisibleChange?: (visible: boolean) => void;
+	mouseLeaveDelay?: number;
+	mouseEnterDelay?: number;
 	children?: ReactNode;
 }
 
@@ -45,6 +49,8 @@ const defaultProps = {
 	trigger: 'hover' as TooltipTriggers,
 	placement: 'top' as TooltipPlacement,
 	defaultVisible: false,
+	mouseLeaveDelay: 0,
+	mouseEnterDelay: 0,
 	overlayClassName: '',
 	onVisibleChange: (() => {}) as (visible: boolean) => void,
 };
@@ -53,12 +59,16 @@ type NativeAttrs = Omit<HTMLAttributes<any>, keyof BaseTooltipProps>;
 
 export type TooltipProps = BaseTooltipProps & NativeAttrs;
 
+const otherTriggers = ['click', 'contextMenu'];
+
 const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 	placement = 'top',
 	children,
 	color,
 	trigger,
 	title,
+	mouseLeaveDelay,
+	mouseEnterDelay,
 	visible: propVisible,
 	defaultVisible = false,
 	onVisibleChange,
@@ -69,10 +79,29 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 	const [visible, setVisible] = useState<boolean>(defaultVisible);
 
 	const ref = useRef<HTMLDivElement>(null);
+	const timer = useRef<number>();
 
 	const handleVisibleChange = (nextVisible: boolean) => {
-		setVisible(nextVisible);
-		onVisibleChange?.(nextVisible);
+		const clear = () => {
+			clearTimeout(timer.current);
+			timer.current = undefined;
+		};
+
+		const handler = (nextState: boolean) => {
+			setVisible(nextState);
+			onVisibleChange?.(nextState);
+			clear();
+		};
+		if (nextVisible)
+			return (timer.current = window.setTimeout(
+				() => handler(true),
+				mouseEnterDelay,
+			));
+
+		const leaveDelayHandler = otherTriggers.includes(trigger as TooltipTriggers)
+			? 0
+			: mouseLeaveDelay;
+		timer.current = window.setTimeout(() => handler(false), leaveDelayHandler);
 	};
 
 	const handleMouseEvent = (next: boolean) => {
@@ -82,7 +111,10 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 		return trigger === 'click' && handleVisibleChange(!visible);
 	};
 
-	const handleContextMenu = () => {
+	const handleContextMenu = (e: MouseEvent<HTMLDivElement>) => {
+		e.stopPropagation();
+		e.preventDefault();
+
 		return trigger === 'contextMenu' && handleVisibleChange(!visible);
 	};
 
@@ -91,6 +123,13 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 			setVisible(propVisible);
 		}
 	}, [propVisible]);
+
+	useClickAway(
+		ref,
+		() =>
+			otherTriggers.includes(trigger as TooltipTriggers) &&
+			handleVisibleChange(false),
+	);
 
 	const contentProps = {
 		visible,
@@ -115,7 +154,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 			onMouseLeave={() => handleMouseEvent(false)}
 		>
 			{children}
-			{visible && <TooltipContent {...contentProps}>{title}</TooltipContent>}
+			<TooltipContent {...contentProps}>{title}</TooltipContent>
 		</div>
 	);
 };
