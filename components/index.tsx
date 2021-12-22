@@ -18,3 +18,6 @@ export { default as Upload } from './upload';
 
 export type { TooltipProps } from './tooltip';
 export { default as Tooltip } from './tooltip';
+
+export type { TextareaProps } from './textarea';
+export { default as Textarea } from './textarea';
