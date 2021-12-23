@@ -24,3 +24,6 @@ export { default as Textarea } from './textarea';
 
 export type { ModalProps } from './modal';
 export { default as Modal } from './modal';
+
+export type { ImageProps } from './image';
+export { default as Image } from './image';
