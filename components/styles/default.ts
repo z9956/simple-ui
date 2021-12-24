@@ -8,6 +8,7 @@ export const defaultStyles = {
 	success: '#0070f3',
 	warning: '#f5a623',
 	secondary: '#d9d9d9',
+	white: '#fff',
 	defaultColor: '#000000d9',
 	defaultBorder: '#d9d9d9',
 	disabled: '#fafafa',

@@ -27,3 +27,6 @@ export { default as Modal } from './modal';
 
 export type { ImageProps } from './image';
 export { default as Image } from './image';
+
+export type { TagProps } from './tag';
+export { default as Tag } from './tag';
