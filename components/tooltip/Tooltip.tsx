@@ -14,7 +14,7 @@ import TooltipContent from './TooltipContent';
 import { css } from '@emotion/css';
 import useClickAway from '../utils/useClickAway';
 
-type TooltipTriggers = 'hover' | 'click' | 'contextMenu';
+export type TooltipTriggers = 'hover' | 'click' | 'contextMenu';
 
 export type TooltipPlacement =
 	| 'top'
@@ -93,15 +93,12 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 			clear();
 		};
 		if (nextVisible)
-			return (timer.current = window.setTimeout(
-				() => handler(true),
-				mouseEnterDelay,
-			));
+			return (timer.current = setTimeout(() => handler(true), mouseEnterDelay));
 
 		const leaveDelayHandler = otherTriggers.includes(trigger as TooltipTriggers)
 			? 0
 			: mouseLeaveDelay;
-		timer.current = window.setTimeout(() => handler(false), leaveDelayHandler);
+		timer.current = setTimeout(() => handler(false), leaveDelayHandler);
 	};
 
 	const handleMouseEvent = (next: boolean) => {
@@ -160,5 +157,7 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 };
 
 Tooltip.defaultProps = defaultProps;
+
+Tooltip.displayName = 'Tooltip';
 
 export default Tooltip;
