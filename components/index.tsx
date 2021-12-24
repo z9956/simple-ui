@@ -30,3 +30,6 @@ export { default as Image } from './image';
 
 export type { TagProps } from './tag';
 export { default as Tag } from './tag';
+
+export type { PopoverProps } from './popover';
+export { default as Popover } from './popover';

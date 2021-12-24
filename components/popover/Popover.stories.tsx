@@ -2,20 +2,26 @@ import { Meta, Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
 
-import { Tooltip, Button, TooltipProps } from '../index';
+import { Popover, Button, PopoverProps } from '../index';
 
 export default {
-	title: 'Tooltip',
-	component: Tooltip,
+	title: 'Popover',
+	component: Popover,
 } as Meta;
 
-const title = '文字提示气泡框';
-
-export const Base: Story<TooltipProps> = () => {
+export const Base: Story<PopoverProps> = () => {
 	const handleVisibleChange = (e: boolean) => {
 		console.log(e);
 		action('onVisibleChange')(e);
 	};
+
+	const title = <span>Title</span>;
+	const content = (
+		<div>
+			<p>Content</p>
+			<p>Content</p>
+		</div>
+	);
 
 	return (
 		<div
@@ -28,25 +34,25 @@ export const Base: Story<TooltipProps> = () => {
 				transform: translate(-50%, -50%);
 			`}
 		>
-			<div>
-				<Tooltip
+			<div className={css``}>
+				<Popover
 					placement={'bottom'}
 					title={title}
-					color={'blue'}
+					content={content}
 					trigger={'click'}
 					onVisibleChange={handleVisibleChange}
 				>
-					<Button>Tooltip click</Button>
-				</Tooltip>
-				<Tooltip
+					<Button>Popover click</Button>
+				</Popover>
+				<Popover
 					placement={'bottomRight'}
 					title={title}
-					color={'orange'}
+					content={content}
 					trigger={'contextMenu'}
 					onVisibleChange={handleVisibleChange}
 				>
-					<Button>Tooltip contextMenu</Button>
-				</Tooltip>
+					<Button>Popover contextMenu</Button>
+				</Popover>
 			</div>
 
 			<div
@@ -64,60 +70,60 @@ export const Base: Story<TooltipProps> = () => {
 			>
 				<div>
 					<div />
-					<Tooltip placement="topLeft" title={title} color={'blue'}>
+					<Popover placement="topLeft" title={title} content={content}>
 						<Button>TL</Button>
-					</Tooltip>
-					<Tooltip placement="top" title={title} color={'orange'}>
+					</Popover>
+					<Popover placement="top" title={title} content={content}>
 						<Button>Top</Button>
-					</Tooltip>
-					<Tooltip placement="topRight" title={title} color={'gray'}>
+					</Popover>
+					<Popover placement="topRight" title={title} content={content}>
 						<Button>TR</Button>
-					</Tooltip>
+					</Popover>
 				</div>
 				<div>
-					<Tooltip placement="leftTop" title={title}>
+					<Popover placement="leftTop" title={title} content={content}>
 						<Button>LT</Button>
-					</Tooltip>
+					</Popover>
 					<div />
 					<div />
 					<div />
-					<Tooltip placement="rightTop" title={title}>
+					<Popover placement="rightTop" title={title} content={content}>
 						<Button>RT</Button>
-					</Tooltip>
+					</Popover>
 				</div>
 				<div>
-					<Tooltip placement="left" title={title}>
+					<Popover placement="left" title={title} content={content}>
 						<Button>Left</Button>
-					</Tooltip>
+					</Popover>
 					<div />
 					<div />
 					<div />
-					<Tooltip placement="right" title={title}>
+					<Popover placement="right" title={title} content={content}>
 						<Button>Right</Button>
-					</Tooltip>
+					</Popover>
 				</div>
 				<div>
-					<Tooltip placement="leftBottom" title={title}>
+					<Popover placement="leftBottom" title={title} content={content}>
 						<Button>LB</Button>
-					</Tooltip>
+					</Popover>
 					<div />
 					<div />
 					<div />
-					<Tooltip placement="rightBottom" title={title}>
+					<Popover placement="rightBottom" title={title} content={content}>
 						<Button>RB</Button>
-					</Tooltip>
+					</Popover>
 				</div>
 				<div>
 					<div />
-					<Tooltip placement="bottomLeft" title={title}>
+					<Popover placement="bottomLeft" title={title} content={content}>
 						<Button>BL</Button>
-					</Tooltip>
-					<Tooltip placement="bottom" title={title}>
+					</Popover>
+					<Popover placement="bottom" title={title} content={content}>
 						<Button>Bottom</Button>
-					</Tooltip>
-					<Tooltip placement="bottomRight" title={title}>
+					</Popover>
+					<Popover placement="bottomRight" title={title} content={content}>
 						<Button>BR</Button>
-					</Tooltip>
+					</Popover>
 				</div>
 			</div>
 		</div>

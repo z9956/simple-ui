@@ -32,7 +32,7 @@ export type TooltipPlacement =
 
 export interface BaseTooltipProps {
 	trigger?: TooltipTriggers;
-	title: string;
+	title: string | ReactNode;
 	color?: string;
 	visible?: boolean;
 	placement?: TooltipPlacement;
@@ -93,12 +93,15 @@ const Tooltip: FC<PropsWithChildren<TooltipProps>> = ({
 			clear();
 		};
 		if (nextVisible)
-			return (timer.current = setTimeout(() => handler(true), mouseEnterDelay));
+			return (timer.current = window.setTimeout(
+				() => handler(true),
+				mouseEnterDelay,
+			));
 
 		const leaveDelayHandler = otherTriggers.includes(trigger as TooltipTriggers)
 			? 0
 			: mouseLeaveDelay;
-		timer.current = setTimeout(() => handler(false), leaveDelayHandler);
+		timer.current = window.setTimeout(() => handler(false), leaveDelayHandler);
 	};
 
 	const handleMouseEvent = (next: boolean) => {

@@ -6,6 +6,7 @@ import {
 	useState,
 	useMemo,
 	MouseEvent,
+	ReactNode,
 } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { createPortal } from 'react-dom';
@@ -27,7 +28,7 @@ import '../styles/transition';
 export type TooltipContentProps = {
 	visible: boolean;
 	color?: string;
-	title: string;
+	title: string | ReactNode;
 	placement: TooltipPlacement;
 	overlayStyle?: CSSProperties;
 	overlayClassName?: string;
@@ -140,29 +141,33 @@ const TooltipContent: FC<TooltipContentProps> = ({
 				)}
 			>
 				<div
-					className={css`
+					className={cx(css`
 						box-sizing: border-box;
 						position: relative;
 						height: 100%;
-					`}
+						z-index: 1;
+					`)}
 				>
 					<span
-						className={css`
-							width: 0;
-							height: 0;
-							border-style: solid;
-							border-width: 6px 6px 0 6px;
-							box-sizing: border-box;
-							position: absolute;
-							top: ${arrowPosition.top};
-							right: ${arrowPosition.right};
-							left: ${arrowPosition.left};
-							bottom: ${arrowPosition.bottom};
-							transform: ${arrowPosition.transform};
-							border-color: transparent ${color ?? 'rgba(0, 0, 0, 0.75)'}
-								transparent transparent;
-							pointer-events: none;
-						`}
+						className={cx(
+							css`
+								width: 6px;
+								height: 6px;
+								border-style: solid;
+								border-width: 6px 6px 0 6px;
+								box-sizing: border-box;
+								position: absolute;
+								top: ${arrowPosition.top};
+								right: ${arrowPosition.right};
+								left: ${arrowPosition.left};
+								bottom: ${arrowPosition.bottom};
+								transform: ${arrowPosition.transform};
+								border-color: transparent ${color ?? 'rgba(0, 0, 0, 0.75)'}
+									transparent transparent;
+								pointer-events: none;
+							`,
+							'tooltip-arrow',
+						)}
 					/>
 					{title}
 				</div>
