@@ -75,17 +75,25 @@ export const getButtonStyles = (props: StyleProps) => {
 			css`
 				transition: 0.1s all;
 
-				&[disabled] {
-					cursor: not-allowed;
-					${css({ ...disabledStyles })};
-				}
-
 				:active {
 					transform: scale(0.95);
 				}
 
 				:hover {
 					${css({ ...hoverStyles })};
+				}
+
+				&[disabled] {
+					cursor: not-allowed;
+					${css({ ...disabledStyles })};
+
+					:active {
+						transform: none;
+					}
+
+					:hover {
+						opacity: 1;
+					}
 				}
 			`,
 		),
