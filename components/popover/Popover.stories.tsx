@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { css } from '@emotion/css';
 
 import { Popover, Button, PopoverProps } from '../index';
@@ -10,17 +9,20 @@ export default {
 } as Meta;
 
 export const Base: Story<PopoverProps> = () => {
-	const handleVisibleChange = (e: boolean) => {
-		console.log(e);
-		action('onVisibleChange')(e);
-	};
-
 	const title = <span>Title</span>;
+
 	const content = (
 		<div>
 			<p>Content</p>
 			<p>Content</p>
 		</div>
+	);
+
+	const ItemContent = (
+		<>
+			<Popover.Item>Popover.Item content</Popover.Item>
+			<Popover.Item>Popover.Item content</Popover.Item>
+		</>
 	);
 
 	return (
@@ -35,23 +37,16 @@ export const Base: Story<PopoverProps> = () => {
 			`}
 		>
 			<div className={css``}>
-				<Popover
-					placement={'bottom'}
-					title={title}
-					content={content}
-					trigger={'click'}
-					onVisibleChange={handleVisibleChange}
-				>
-					<Button>Popover click</Button>
+				<Popover placement={'left'} content={ItemContent} title={title}>
+					<Button>Popover.Item, Click me</Button>
 				</Popover>
 				<Popover
 					placement={'bottomRight'}
 					title={title}
-					content={content}
+					content={ItemContent}
 					trigger={'contextMenu'}
-					onVisibleChange={handleVisibleChange}
 				>
-					<Button>Popover contextMenu</Button>
+					<Button>Popover.Item, Popover contextMenu</Button>
 				</Popover>
 			</div>
 
@@ -70,13 +65,28 @@ export const Base: Story<PopoverProps> = () => {
 			>
 				<div>
 					<div />
-					<Popover placement="topLeft" title={title} content={content}>
+					<Popover
+						placement="topLeft"
+						title={title}
+						content={content}
+						showCloseButton
+					>
 						<Button>TL</Button>
 					</Popover>
-					<Popover placement="top" title={title} content={content}>
+					<Popover
+						placement="top"
+						title={title}
+						content={content}
+						showCloseButton
+					>
 						<Button>Top</Button>
 					</Popover>
-					<Popover placement="topRight" title={title} content={content}>
+					<Popover
+						placement="topRight"
+						title={title}
+						content={content}
+						showCloseButton
+					>
 						<Button>TR</Button>
 					</Popover>
 				</div>

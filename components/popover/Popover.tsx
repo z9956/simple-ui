@@ -1,15 +1,17 @@
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
+import { css, cx } from '@emotion/css';
 
 import Tooltip, {
 	TooltipPlacement,
 	TooltipTriggers,
 	BaseTooltipProps,
 } from '../tooltip/Tooltip';
-import { css, cx } from '@emotion/css';
 import { defaultStyles } from '../styles/default';
+import { PopoverContext } from './context';
 
 export interface BasePopoverProps extends BaseTooltipProps {
 	content?: ReactNode;
+	showCloseButton?: boolean;
 }
 
 export type PopoverProps = Omit<BasePopoverProps, 'color'>;
@@ -21,7 +23,6 @@ const defaultProps = {
 	mouseLeaveDelay: 0,
 	mouseEnterDelay: 0,
 	overlayClassName: '',
-	onVisibleChange: (() => {}) as (visible: boolean) => void,
 };
 
 const Popover: FC<PopoverProps> = ({
@@ -33,6 +34,7 @@ const Popover: FC<PopoverProps> = ({
 	onVisibleChange,
 	overlayClassName,
 	defaultVisible = false,
+	showCloseButton = false,
 	...otherProps
 }: PopoverProps) => {
 	const [visible, setVisible] = useState<boolean>(defaultVisible);
@@ -54,6 +56,7 @@ const Popover: FC<PopoverProps> = ({
 				className={cx(
 					css`
 						min-width: 150px;
+
 						p {
 							margin: 0;
 						}
@@ -72,35 +75,64 @@ const Popover: FC<PopoverProps> = ({
 				>
 					{title}
 				</div>
-				<div className="popover-inner-content">{content}</div>
+				<div
+					className={cx(
+						css`
+							padding: 10px 0;
+						`,
+						'popover-inner-content',
+					)}
+				>
+					{content}
+				</div>
+				{showCloseButton && (
+					<div
+						className={cx(
+							css`
+								color: ${defaultStyles.primary};
+								cursor: pointer;
+							`,
+							'popover-inner-close',
+						)}
+						onClick={() => handleVisibleChange(false)}
+					>
+						close
+					</div>
+				)}
 			</div>
 		);
 	}, [content]);
 
-	return (
-		<Tooltip
-			overlayClassName={cx(
-				css`
-					color: ${defaultStyles.defaultColor};
-					background-color: #fff;
-					box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
-						0 9px 28px 8px #0000000d;
+	const onItemClick = () => {
+		handleVisibleChange(false);
+	};
 
-					.tooltip-arrow {
-						border-color: #fff;
-						box-shadow: 3px 3px 7px #00000012;
-					}
-				`,
-				overlayClassName,
-			)}
-			visible={visible}
-			title={renderContent}
-			onVisibleChange={handleVisibleChange}
-			trigger={trigger}
-			{...otherProps}
-		>
-			{children}
-		</Tooltip>
+	const value = {
+		onItemClick,
+	};
+
+	return (
+		<PopoverContext.Provider value={value}>
+			<Tooltip
+				color={'#fff'}
+				overlayClassName={cx(
+					css`
+						color: ${defaultStyles.defaultColor};
+						background-color: #fff;
+						box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+							0 9px 28px 8px #0000000d;
+					`,
+					overlayClassName,
+				)}
+				visible={visible}
+				title={renderContent}
+				onVisibleChange={handleVisibleChange}
+				trigger={trigger}
+				{...otherProps}
+			>
+				{children}
+			</Tooltip>
+		</PopoverContext.Provider>
 	);
 };
 

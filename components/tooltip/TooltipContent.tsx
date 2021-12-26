@@ -17,6 +17,7 @@ import { TooltipPlacement } from './Tooltip';
 import usePortal from '../utils/usePortal';
 import {
 	defaultTooltipPosition,
+	getArrowColor,
 	getArrowPosition,
 	getPosition,
 	TooltipPosition,
@@ -80,6 +81,7 @@ const TooltipContent: FC<TooltipContentProps> = ({
 	visible,
 	color,
 	title,
+	children,
 	placement,
 	overlayStyle,
 	overlayClassName,
@@ -91,6 +93,11 @@ const TooltipContent: FC<TooltipContentProps> = ({
 	const arrowPosition = useMemo(
 		() => getArrowPosition(placement, arrowOffset.x, arrowOffset.y),
 		[placement],
+	);
+
+	const arrowBgColor = useMemo(
+		() => getArrowColor(placement, color),
+		[placement, color],
 	);
 
 	if (!parent) return null;
@@ -114,6 +121,7 @@ const TooltipContent: FC<TooltipContentProps> = ({
 	};
 
 	if (!el) return null;
+
 	return createPortal(
 		<CSSTransition in={visible} timeout={TIMEOUT} classNames="my-node">
 			<div
@@ -135,17 +143,26 @@ const TooltipContent: FC<TooltipContentProps> = ({
 						box-sizing: border-box;
 						color: #fff;
 						background-color: ${color ?? 'rgba(0, 0, 0, 0.75)'};
-						pointer-events: none;
 					`,
 					overlayClassName,
 				)}
 			>
+				{title}
 				<div
 					className={cx(css`
+						min-width: 6px;
+						min-height: 6px;
 						box-sizing: border-box;
-						position: relative;
-						height: 100%;
+						position: absolute;
+						top: ${arrowPosition.top};
+						right: ${arrowPosition.right};
+						left: ${arrowPosition.left};
+						bottom: ${arrowPosition.bottom};
+						transform: ${arrowPosition.parentTransform};
+						pointer-events: none;
 						z-index: 1;
+						//overflow: hidden;
+						background: 0 0;
 					`)}
 				>
 					<span
@@ -153,23 +170,17 @@ const TooltipContent: FC<TooltipContentProps> = ({
 							css`
 								width: 6px;
 								height: 6px;
-								border-style: solid;
-								border-width: 6px 6px 0 6px;
 								box-sizing: border-box;
 								position: absolute;
-								top: ${arrowPosition.top};
-								right: ${arrowPosition.right};
-								left: ${arrowPosition.left};
-								bottom: ${arrowPosition.bottom};
 								transform: ${arrowPosition.transform};
-								border-color: transparent ${color ?? 'rgba(0, 0, 0, 0.75)'}
-									transparent transparent;
+								background: ${arrowBgColor?.bgColor};
+								// background-color: ${color ?? 'rgba(0, 0, 0, 0.75)'};
+								// background: linear-gradient(-45deg, deeppink, deeppink 50%, transparent 50%, transparent 100%);
 								pointer-events: none;
 							`,
 							'tooltip-arrow',
 						)}
 					/>
-					{title}
 				</div>
 			</div>
 		</CSSTransition>,

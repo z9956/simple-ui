@@ -21,6 +21,7 @@ export interface TooltipIconPosition {
 	right: string;
 	bottom: string;
 	transform: string;
+	parentTransform: string;
 }
 
 export const defaultTooltipPosition = {
@@ -111,86 +112,143 @@ export const getArrowPosition = (
 			right: 'auto',
 			left: '50%',
 			bottom: `${offsetAbsolute}`,
-			transform: 'translate(-50%, 100%) rotate(45deg)',
+			parentTransform: 'translate(0, 100%)',
+			transform: 'translate(0, -50%) rotate(45deg)',
 		},
 		topLeft: {
 			top: 'auto',
 			right: 'auto',
 			left: `${offsetX}`,
 			bottom: `${offsetAbsolute}`,
-			transform: 'translate(0, 100%) rotate(45deg)',
+			parentTransform: 'translate(0, 100%)',
+			transform: 'translate(0, -50%) rotate(45deg)',
 		},
 		topRight: {
 			top: 'auto',
 			right: `${offsetX}`,
 			left: 'auto',
 			bottom: `${offsetAbsolute}`,
-			transform: 'translate(0, 100%) rotate(45deg)',
+			parentTransform: 'translate(0, 100%)',
+			transform: 'translate(0, -50%) rotate(45deg)',
 		},
 		bottom: {
 			top: `${offsetAbsolute}`,
 			right: 'auto',
 			left: '50%',
 			bottom: 'auto',
-			transform: 'translate(-50%, -100%) rotate(-135deg)',
+			parentTransform: 'translate(0, -100%)',
+			transform: 'translate(0, 50%) rotate(45deg)',
 		},
 		bottomLeft: {
 			top: `${offsetAbsolute}`,
 			right: 'auto',
 			left: `${offsetX}`,
 			bottom: 'auto',
-			transform: 'translate(0, -100%) rotate(-135deg)',
+			parentTransform: 'translate(0, -100%)',
+			transform: 'translate(0, 50%) rotate(45deg)',
 		},
 		bottomRight: {
 			top: `${offsetAbsolute}`,
 			right: `${offsetX}`,
 			left: 'auto',
 			bottom: 'auto',
-			transform: 'translate(0, -100%) rotate(-135deg)',
+			parentTransform: 'translate(0, -100%)',
+			transform: 'translate(0, 50%) rotate(45deg)',
 		},
 		left: {
 			top: '50%',
 			right: '0',
 			left: 'auto',
 			bottom: 'auto',
-			transform: 'translate(100%, -50%) rotate(-45deg)',
+			parentTransform: 'translate(100%, 0)',
+			transform: 'translate(-50%, 0) rotate(45deg)',
 		},
 		leftTop: {
 			top: `${offsetY}`,
 			right: '0',
 			left: 'auto',
 			bottom: 'auto',
-			transform: 'translate(100%, -100%) rotate(-45deg)',
+			parentTransform: 'translate(100%, 0)',
+			transform: 'translate(-50%, 0) rotate(45deg)',
 		},
 		leftBottom: {
 			top: 'auto',
 			right: '0',
 			left: 'auto',
 			bottom: `${offsetY}`,
-			transform: 'translate(100%, 160%) rotate(-45deg)',
+			parentTransform: 'translate(100%, 0)',
+			transform: 'translate(-50%, 0) rotate(45deg)',
 		},
 		right: {
 			top: '50%',
 			right: 'auto',
 			left: '0',
 			bottom: 'auto',
-			transform: 'translate(-100%, -100%) rotate(135deg)',
+			parentTransform: 'translate(-100%, 0)',
+			transform: 'translate(50%, 0) rotate(45deg)',
 		},
 		rightTop: {
 			top: `${offsetY}`,
 			right: 'auto',
 			left: '0',
 			bottom: 'auto',
-			transform: 'translate(-100%, -160%) rotate(135deg)',
+			parentTransform: 'translate(-100%, 0)',
+			transform: 'translate(50%, 0) rotate(45deg)',
 		},
 		rightBottom: {
 			top: 'auto',
 			right: 'auto',
 			left: '0',
 			bottom: `${offsetY}`,
-			transform: 'translate(-100%, 100%) rotate(135deg)',
+			parentTransform: 'translate(-100%, 0)',
+			transform: 'translate(50%, 0) rotate(45deg)',
 		},
 	};
 
 	return positions[placement] || (positions.top as TooltipIconPosition);
+};
+
+export const getArrowColor = (placement: TooltipPlacement, color?: string) => {
+	color = color ?? 'rgba(0, 0, 0, 0.75)';
+
+	const bgColors: { [key in TooltipPlacement]?: { bgColor: string } } = {
+		top: {
+			bgColor: `linear-gradient(-45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		topLeft: {
+			bgColor: `linear-gradient(-45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		topRight: {
+			bgColor: `linear-gradient(-45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		bottom: {
+			bgColor: `linear-gradient(135deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		bottomLeft: {
+			bgColor: `linear-gradient(135deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		bottomRight: {
+			bgColor: `linear-gradient(135deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		left: {
+			bgColor: `linear-gradient(-135deg, ${color}, ${color} 52%, transparent 50%, transparent 100%)`,
+		},
+		leftTop: {
+			bgColor: `linear-gradient(-135deg, ${color}, ${color} 52%, transparent 50%, transparent 100%)`,
+		},
+		leftBottom: {
+			bgColor: `linear-gradient(-135deg, ${color}, ${color} 52%, transparent 50%, transparent 100%)`,
+		},
+		right: {
+			bgColor: `linear-gradient(45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		rightTop: {
+			bgColor: `linear-gradient(45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+		rightBottom: {
+			bgColor: `linear-gradient(45deg, ${color}, ${color} 50%, transparent 50%, transparent 100%)`,
+		},
+	};
+
+	return bgColors[placement];
 };
