@@ -54,7 +54,7 @@ export const Base: Story<UploadProps> = () => {
 			</div>
 			<div>
 				<Upload onChange={handleUpload} disabled>
-					<Button icon={<AiOutlineUpload />} variant={'secondary'}>
+					<Button disabled icon={<AiOutlineUpload />} variant={'secondary'}>
 						disabled upload
 					</Button>
 				</Upload>
