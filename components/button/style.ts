@@ -31,6 +31,23 @@ const getButtonColors = (variant: ButtonTypes) => {
 	return colors[variant];
 };
 
+const getButtonHoverColors = (variant: ButtonTypes) => {
+	const colors = {
+		secondary: {
+			borderColor: defaultStyles.primary,
+			color: defaultStyles.primary,
+		},
+		primary: {
+			opacity: 0.8,
+		},
+		error: {
+			opacity: 0.8,
+		},
+	};
+
+	return colors[variant];
+};
+
 export const disabledStyles = {
 	borderColor: defaultStyles.disabled,
 	color: defaultStyles.disabledColor,
@@ -41,6 +58,7 @@ export const getButtonStyles = (props: StyleProps) => {
 	const { size, variant } = props;
 	const sizeStyles = getButtonSize(size);
 	const variantStyles = getButtonColors(variant);
+	const hoverStyles = getButtonHoverColors(variant);
 
 	return {
 		button: cx(
@@ -55,9 +73,19 @@ export const getButtonStyles = (props: StyleProps) => {
 				...variantStyles,
 			}),
 			css`
+				transition: 0.1s all;
+
 				&[disabled] {
 					cursor: not-allowed;
 					${css({ ...disabledStyles })};
+				}
+
+				:active {
+					transform: scale(0.95);
+				}
+
+				:hover {
+					${css({ ...hoverStyles })};
 				}
 			`,
 		),
