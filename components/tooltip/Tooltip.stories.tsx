@@ -20,8 +20,6 @@ export const Base: Story<TooltipProps> = () => {
 	return (
 		<div
 			className={css`
-				width: 500px;
-				height: 500px;
 				position: absolute;
 				top: 50%;
 				left: 50%;

@@ -28,8 +28,6 @@ export const Base: Story<PopoverProps> = () => {
 	return (
 		<div
 			className={css`
-				width: 500px;
-				height: 500px;
 				position: absolute;
 				top: 50%;
 				left: 50%;
