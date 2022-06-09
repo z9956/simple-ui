@@ -10,6 +10,6 @@ module.exports = {
 		'@storybook/addon-controls',
 	],
 	core: {
-		builder: 'webpack5',
+		builder: '@storybook/builder-vite',
 	},
 };
