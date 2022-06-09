@@ -4,7 +4,7 @@
 	"description": "A simple UI library",
 	"author": "9956 <zhz995617@gmail.com>",
 	"scripts": {
-		"build": "build-storybook -c .storybook -o public",
+		"build": "build-storybook -c .storybook -o dist",
 		"build-storybook": "build-storybook",
 		"prepare": "husky install",
 		"rollup": "rollup -c",
