@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "build-storybook -c .storybook -o dist",
 		"build-storybook": "build-storybook",
+		"build:rollup": "rollup -c rollup.config.js",
 		"prepare": "husky install",
 		"rollup": "rollup -c",
 		"storybook": "start-storybook -p 9000"

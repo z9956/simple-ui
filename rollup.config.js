@@ -8,6 +8,8 @@ import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+
 const plugins = [
 	resolve(),
 	json(),
@@ -16,9 +18,17 @@ const plugins = [
 	}),
 	typescript({
 		tsconfig: './tsconfig.json',
-		exclude: ['node_modules', 'dist'],
 	}),
-	babel({ babelHelpers: 'bundled' }),
+	babel({
+		babelHelpers: 'bundled',
+		extensions,
+		exclude: 'node_modules/**',
+		presets: [
+			'@babel/preset-env',
+			'@babel/preset-react',
+			'@babel/preset-typescript',
+		],
+	}),
 	production && terser(),
 ];
 
