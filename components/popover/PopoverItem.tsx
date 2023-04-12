@@ -1,9 +1,10 @@
-import { FC, MouseEvent } from 'react';
+import { FC, MouseEvent, ReactNode } from 'react';
 
 import { usePopoverContext } from './context';
 
 export type PopoverItemProps = {
 	className?: string;
+	children?: ReactNode;
 	onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 };
 

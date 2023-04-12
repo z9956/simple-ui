@@ -33,6 +33,7 @@ export type TooltipContentProps = {
 	placement: TooltipPlacement;
 	overlayStyle?: CSSProperties;
 	overlayClassName?: string;
+	children?: ReactNode;
 	parent?: MutableRefObject<HTMLElement | null>;
 };
 
