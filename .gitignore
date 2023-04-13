@@ -10,6 +10,7 @@
 
 # production
 /dist
+packages/**/node_modules
 
 # misc
 .DS_Store
@@ -34,3 +35,6 @@ package-lock.json
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# turbo
+.turbo
