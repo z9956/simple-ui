@@ -2,9 +2,7 @@
 const config = {
 	stories: [
 		// '../packages/components/**/**/*.mdx',
-		// '../packages/components/**/*.stories.@(js|jsx|ts|tsx)',
-		//TODO
-		'../packages/components/button/Button.stories.tsx',
+		'../packages/components/**/*.stories.@(js|jsx|ts|tsx)',
 	],
 	addons: [
 		'@storybook/addon-links',
@@ -15,11 +13,20 @@ const config = {
 		'@storybook/addon-controls',
 		'@storybook/addon-actions',
 	],
+	typescript: {
+		// reactDocgen: 'react-docgen',
+		reactDocgen: 'react-docgen-typescript',
+		check: true,
+	},
+	features: {
+		storyStoreV7: true,
+	},
 	framework: {
 		name: '@storybook/react-webpack5',
 		options: {},
 	},
 	core: {
+		builder: '@storybook/builder-vite',
 		disableTelemetry: true, // 👈 Disables telemetry
 	},
 	docs: {

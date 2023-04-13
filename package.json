@@ -8,8 +8,7 @@
 		"dev": "turbo run dev --filter=!./examples/*",
 		"build": "turbo run build --filter=!./examples/*",
 		"storybook": "storybook dev -p 9000",
-		"build:storybook": "storybook build -c .storybook -o dist",
-		"build-storybook": "storybook build",
+		"build-storybook": "storybook build -c .storybook -o dist",
 		"clean:storybook": "rm -rf node_modules/.cache/storybook",
 		"format:write": "prettier --write packages/components --cache",
 		"lint": "eslint packages/components --ext .ts,.tsx --config .eslintrc --cache",
@@ -23,8 +22,6 @@
 		"react-transition-group": "^4.4.5"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.19.0",
-		"@babel/preset-env": "^7.19.0",
 		"@emotion/react": "^11.10.4",
 		"@storybook/addon-a11y": "^7.0.4",
 		"@storybook/addon-actions": "^7.0.4",
@@ -34,6 +31,7 @@
 		"@storybook/addon-interactions": "^7.0.4",
 		"@storybook/addon-links": "^7.0.4",
 		"@storybook/blocks": "^7.0.4",
+		"@storybook/builder-vite": "^7.0.4",
 		"@storybook/react": "^7.0.4",
 		"@storybook/react-webpack5": "^7.0.4",
 		"@storybook/testing-library": "^0.1.0",
@@ -42,7 +40,6 @@
 		"@types/react-transition-group": "^4.4.4",
 		"@typescript-eslint/eslint-plugin": "^5.37.0",
 		"@typescript-eslint/parser": "^5.37.0",
-		"babel-loader": "^8.2.3",
 		"eslint": "^8.23.1",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-react": "^7.31.8",
@@ -50,6 +47,7 @@
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
 		"prettier": "^2.4.1",
+		"react-docgen": "^5.4.3",
 		"storybook": "^7.0.4",
 		"turbo": "canary",
 		"typescript": "^4.8.3"
