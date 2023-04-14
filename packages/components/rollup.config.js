@@ -1,4 +1,3 @@
-import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
 import json from '@rollup/plugin-json';
@@ -8,8 +7,6 @@ import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-
 const plugins = [
 	resolve(),
 	json(),
@@ -18,16 +15,6 @@ const plugins = [
 	}),
 	typescript({
 		tsconfig: './tsconfig.json',
-	}),
-	babel({
-		babelHelpers: 'bundled',
-		extensions,
-		exclude: ['node_modules/**', '**/*.stories.tsx', '**/*.stories.ts'],
-		presets: [
-			'@babel/preset-env',
-			'@babel/preset-react',
-			'@babel/preset-typescript',
-		],
 	}),
 	production && terser(),
 ];
