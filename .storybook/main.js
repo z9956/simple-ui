@@ -14,8 +14,8 @@ const config = {
 		'@storybook/addon-actions',
 	],
 	typescript: {
-		// reactDocgen: 'react-docgen',
-		reactDocgen: 'react-docgen-typescript',
+		reactDocgen: 'react-docgen',
+		// reactDocgen: 'react-docgen-typescript',
 		check: true,
 	},
 	features: {

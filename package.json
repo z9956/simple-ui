@@ -9,10 +9,11 @@
 		"build": "turbo run build --filter=!./examples/*",
 		"storybook": "storybook dev -p 9000",
 		"build-storybook": "storybook build -c .storybook -o dist",
-		"clean:storybook": "rm -rf node_modules/.cache/storybook",
-		"format:write": "prettier --write packages/components --cache",
-		"lint": "eslint packages/components --ext .ts,.tsx --config .eslintrc --cache",
-		"prepare": "husky install"
+		"lint": "pnpm lint:prettier && pnpm lint:eslint",
+		"lint:prettier": "prettier --write packages/components --cache",
+		"lint:eslint": "eslint packages/components --ext .ts,.tsx --config .eslintrc --cache",
+		"prepare": "husky install",
+		"test": "jest"
 	},
 	"dependencies": {
 		"@emotion/css": "^11.10.0",
