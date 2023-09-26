@@ -26,7 +26,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 		variant = 'secondary',
 		size = 'md',
 		icon,
-		disabled,
+		disabled = false,
 		className,
 		children,
 		...otherProps
